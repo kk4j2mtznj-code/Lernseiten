@@ -1,0 +1,135 @@
+{
+  "checked": "2026-10-30",
+  "repositories": [
+    {
+      "name": "gc2026weber",
+      "branch": "main",
+      "files": []
+    },
+    {
+      "name": "ghfggjkdfjhlg",
+      "branch": "main",
+      "files": []
+    },
+    {
+      "name": "jnwbr.github.io",
+      "branch": "main",
+      "files": []
+    },
+    {
+      "name": "mathewekstatt-7b",
+      "branch": "main",
+      "files": [
+        "README.md",
+        "brueche-dezimalzahlen/index.html",
+        "grundrechenarten/index.html",
+        "index.html",
+        "zuordnungen/app.js",
+        "zuordnungen/engine.js",
+        "zuordnungen/index.html"
+      ]
+    },
+    {
+      "name": "Magnetismus-Felder",
+      "branch": "main",
+      "files": [
+        "README.md",
+        "index.html",
+        "seefahrer/index.html"
+      ]
+    },
+    {
+      "name": "Deutschwerkstatt-7b-sachtexte",
+      "branch": "main",
+      "files": [
+        "README.md",
+        "index.html",
+        "zeichensetzung/index.html"
+      ]
+    },
+    {
+      "name": "7b-Deutsch-P-pronomen",
+      "branch": "main",
+      "files": [
+        "README.md",
+        "index.html"
+      ]
+    },
+    {
+      "name": "7-Ph-Brennwert",
+      "branch": "main",
+      "files": [
+        "README.md",
+        "index.html"
+      ]
+    },
+    {
+      "name": "bnt-tag",
+      "branch": "main",
+      "files": [
+        "README.md",
+        "index.html"
+      ]
+    },
+    {
+      "name": "Phy-Bildschirmexperiment-waermestroemung",
+      "branch": "main",
+      "files": [
+        "README.md",
+        "index.html"
+      ]
+    },
+    {
+      "name": "8phy-kraefte1",
+      "branch": "main",
+      "files": [
+        "README.md",
+        "index.html"
+      ]
+    },
+    {
+      "name": "Lernspiel-Kompass",
+      "branch": "main",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "name": "Lernseiten",
+      "branch": "main",
+      "files": [
+        "README.md"
+      ]
+    }
+  ],
+  "sites": [
+    {
+      "title": "Mathe 7b - Zuordnungen Exit-Tickets",
+      "url": "https://mathe-7b-zuordnungen-exit.jnwbr.chatgpt.site"
+    },
+    {
+      "title": "Mathewerkstatt 7b · Fit für die Klassenarbeit",
+      "url": "https://mathe7b-brueche-training.jnwbr.chatgpt.site"
+    },
+    {
+      "title": "Deutsch entdecken · Klasse 3",
+      "url": "https://deutsch-entdecken-klasse-3.jnwbr.chatgpt.site"
+    },
+    {
+      "title": "Mathewerkstatt 9e",
+      "url": "https://mathe-9e-lernwerkstatt.jnwbr.chatgpt.site"
+    },
+    {
+      "title": "Kleines 1×1 – Training",
+      "url": "https://kleines-einmaleins-training.jnwbr.chatgpt.site"
+    },
+    {
+      "title": "Physikwerkstatt · Bewegung & Geschwindigkeit",
+      "url": "https://bewegung-geschwindigkeit-training.jnwbr.chatgpt.site"
+    },
+    {
+      "title": "Mathewerkstatt · Klasse 6",
+      "url": "https://mathe6-teiler-vielfache.jnwbr.chatgpt.site"
+    }
+  ]
+}
