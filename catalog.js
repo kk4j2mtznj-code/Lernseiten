@@ -1,5 +1,4 @@
 window.LEARNING_CATALOG = [
- ['deutsch-3','Deutsch entdecken',3,'Deutsch','Nomen, Rechtschreibung und Zuhören in einer Lernwerkstatt für die Grundschule.','book','Lernwerkstatt',[['Sites','https://deutsch-entdecken-klasse-3.jnwbr.chatgpt.site']]],
  ['einmaleins','Kleines Einmaleins',5,'Mathematik','Malaufgaben wiederholen, Ergebnisse prüfen und mit einer neuen Runde weiterüben.','numbers','Basistraining',[['Sites','https://kleines-einmaleins-training.jnwbr.chatgpt.site']]],
  ['magnetismus','Magnetismus & Magnetfelder',5,'Physik','Magnete erforschen, Pole unterscheiden und Magnetfelder sichtbar machen.','magnet','Experiment',[['GitHub','https://kk4j2mtznj-code.github.io/Magnetismus-Felder/']]],
  ['kompass','Kompass & Schatzsuche',5,'Physik','Mit dem Schiff zu den Inseln navigieren. Mit Spielmodus für den Tag der offenen Tür.','compass','Lernspiel',[['GitHub','https://kk4j2mtznj-code.github.io/Magnetismus-Felder/seefahrer/']]],
@@ -11,7 +10,7 @@ window.LEARNING_CATALOG = [
  ['sachtexte','Sachtexte verstehen',7,'Deutsch','Wichtige Informationen erkennen, Überschriften finden und Texte erschließen.','book','Lernwerkstatt',[['GitHub','https://kk4j2mtznj-code.github.io/Deutschwerkstatt-7b-sachtexte/']]],
  ['zeichensetzung','Zeichensetzung',7,'Deutsch','Satzzeichen gezielt setzen und Sätze verständlich gliedern.','punctuation','Übung',[['GitHub','https://kk4j2mtznj-code.github.io/Deutschwerkstatt-7b-sachtexte/zeichensetzung/']]],
  ['pronomen','Possessivpronomen',7,'Deutsch','Mein, dein, unser: Besitzverhältnisse mit passenden Pronomen ausdrücken.','book','Übung',[['GitHub','https://kk4j2mtznj-code.github.io/7b-Deutsch-P-pronomen/']]],
- ['geschwindigkeit','Bewegung & Geschwindigkeit',7,'Physik','Bewegungen beschreiben, Geschwindigkeiten berechnen und Weg-Zeit-Diagramme lesen.','speed','Lernwerkstatt',[['Sites','https://bewegung-geschwindigkeit-training.jnwbr.chatgpt.site']]],
+ ['geschwindigkeit','Bewegung & Geschwindigkeit',8,'Physik','Bewegungen beschreiben, Geschwindigkeiten berechnen und Weg-Zeit-Diagramme lesen.','speed','Lernwerkstatt',[['Sites','https://bewegung-geschwindigkeit-training.jnwbr.chatgpt.site']]],
  ['heizwert','Nährwert & Heizwert',7,'Physik','Energiegehalte vergleichen und mit Nährwert und Heizwert rechnen.','energy','Übung',[['GitHub','https://kk4j2mtznj-code.github.io/7-Ph-Brennwert/']]],
  ['waerme','Wärmeströmung',7,'Physik','Wärmeströmung im Haus und im Wasserbad untersuchen – mit interaktivem Lernpfad.','heat','Experiment',[['GitHub','https://kk4j2mtznj-code.github.io/Phy-Bildschirmexperiment-waermestroemung/']]],
  ['nachhaltigkeit','Richtung Zukunft!',7,'Fächerübergreifend','Nachhaltigkeit entdecken und die Themen des BNE-Thementags bearbeiten.','leaf','Projekt',[['GitHub','https://kk4j2mtznj-code.github.io/bnt-tag/']]],

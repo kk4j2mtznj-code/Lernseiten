@@ -10,10 +10,6 @@ Die Seite ist statisch und benötigt keinen Build. `index.html`, `style.css`, `c
 
 ## Lernangebote
 
-### Jahrgang 3
-
-- **Deutsch · Deutsch entdecken**: [Sites](https://deutsch-entdecken-klasse-3.jnwbr.chatgpt.site)
-
 ### Jahrgang 5
 
 - **Mathematik · Kleines Einmaleins**: [Sites](https://kleines-einmaleins-training.jnwbr.chatgpt.site)
@@ -33,13 +29,13 @@ Die Seite ist statisch und benötigt keinen Build. `index.html`, `style.css`, `c
 - **Deutsch · Sachtexte verstehen**: [GitHub](https://kk4j2mtznj-code.github.io/Deutschwerkstatt-7b-sachtexte/)
 - **Deutsch · Zeichensetzung**: [GitHub](https://kk4j2mtznj-code.github.io/Deutschwerkstatt-7b-sachtexte/zeichensetzung/)
 - **Deutsch · Possessivpronomen**: [GitHub](https://kk4j2mtznj-code.github.io/7b-Deutsch-P-pronomen/)
-- **Physik · Bewegung & Geschwindigkeit**: [Sites](https://bewegung-geschwindigkeit-training.jnwbr.chatgpt.site)
 - **Physik · Nährwert & Heizwert**: [GitHub](https://kk4j2mtznj-code.github.io/7-Ph-Brennwert/)
 - **Physik · Wärmeströmung**: [GitHub](https://kk4j2mtznj-code.github.io/Phy-Bildschirmexperiment-waermestroemung/)
 - **Fächerübergreifend · Richtung Zukunft!**: [GitHub](https://kk4j2mtznj-code.github.io/bnt-tag/)
 
 ### Jahrgang 8
 
+- **Physik · Bewegung & Geschwindigkeit**: [Sites](https://bewegung-geschwindigkeit-training.jnwbr.chatgpt.site)
 - **Physik · Kräfte entdecken**: [GitHub](https://kk4j2mtznj-code.github.io/8phy-kraefte1/)
 
 ### Jahrgang 9
@@ -50,9 +46,9 @@ Die Seite ist statisch und benötigt keinen Build. `index.html`, `style.css`, `c
 
 Stand: 30.10.2026. Alle 13 über die Verbindung verfügbaren eigenen Repositories samt Unterordnern sowie alle neun Sites inventarisiert. Acht GitHub-Repositories enthalten schulbezogene Webseiten; leere Repositories und README-only-Repositories sind nicht als Lernangebote verlinkt. Das Kompassspiel liegt in Magnetismus-Felder/seefahrer, nicht im README-only-Repo Lernspiel-Kompass. PDFCraft und die private Morgenroutine gehören nicht zur schulischen Themenübersicht.
 
-13 GitHub-Lernseiten lieferten HTTP 200. Sieben schulische Sites sind laut Sites-Kontostand öffentlich; der direkte automatisierte Abruf liefert HTTP 403. Die Links stammen aus dem aktuellen Sites-Verzeichnis. Es wird keine vollständige unabhängige Erreichbarkeitsprüfung dieser sieben Links behauptet.
+13 GitHub-Lernseiten lieferten HTTP 200. Sechs schulische Sites sind laut Sites-Kontostand öffentlich; der direkte automatisierte Abruf liefert HTTP 403. Die Links stammen aus dem aktuellen Sites-Verzeichnis. Es wird keine vollständige unabhängige Erreichbarkeitsprüfung dieser sechs Links behauptet.
 
-Jahrgang 5 beim Einmaleins und Jahrgang 7 bei Geschwindigkeit und Wärmeströmung orientieren sich am bekannten Unterrichtskontext; die Angebote eignen sich auch zur Wiederholung. Thematisch zusammengehörige GitHub- und Sites-Fassungen werden auf einer Themenkarte zusammengeführt.
+Jahrgang 5 beim Einmaleins und Jahrgang 7 bei Wärmeströmung orientieren sich am bekannten Unterrichtskontext; Bewegung & Geschwindigkeit ist Jahrgang 8 zugeordnet; die Angebote eignen sich auch zur Wiederholung. Thematisch zusammengehörige GitHub- und Sites-Fassungen werden auf einer Themenkarte zusammengeführt.
 
 Neue Einträge in catalog.js ergänzen. Format: ID, Titel, Jahrgang, Fach, Beschreibung, Illustration, Angebotsart, Links. Die Übersicht führt zu bestehenden Übungen; sie sammelt selbst keine Namen oder Exit-Ticket-Antworten.
 
