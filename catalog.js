@@ -15,5 +15,6 @@ window.LEARNING_CATALOG = [
  ['waerme','Wärmeströmung',7,'Physik','Wärmeströmung im Haus und im Wasserbad untersuchen – mit interaktivem Lernpfad.','heat','Experiment',[['GitHub','https://kk4j2mtznj-code.github.io/Phy-Bildschirmexperiment-waermestroemung/']]],
  ['nachhaltigkeit','Richtung Zukunft!',7,'Fächerübergreifend','Nachhaltigkeit entdecken und die Themen des BNE-Thementags bearbeiten.','leaf','Projekt',[['GitHub','https://kk4j2mtznj-code.github.io/bnt-tag/']]],
  ['kraefte','Kräfte entdecken',8,'Physik','Kräfte und ihre Wirkungen in Bildschirmexperimenten und einem Lernpfad untersuchen.','force','Lernpfad',[['GitHub','https://kk4j2mtznj-code.github.io/8phy-kraefte1/']]],
- ['pythagoras','Pythagoras & Grundwissen',9,'Mathematik','Rechtwinklige Dreiecke berechnen und mathematisches Grundwissen festigen.','triangle','Lernwerkstatt',[['Sites','https://mathe-9e-lernwerkstatt.jnwbr.chatgpt.site']]]
+ ['pythagoras','Pythagoras & Grundwissen',9,'Mathematik','Rechtwinklige Dreiecke berechnen und mathematisches Grundwissen festigen.','triangle','Lernwerkstatt',[['Sites','https://mathe-9e-lernwerkstatt.jnwbr.chatgpt.site']]],
+ ['kreise-zylinder','Kreise & Zylinder',9,'Mathematik','Kreisumfang, Kreisflächen und Zylinder auf drei Niveaus üben. Elf Stationen mit anonymen Exit-Tickets.','fraction','Lernwerkstatt',[['GitHub','https://kk4j2mtznj-code.github.io/Lernseiten/kreise-zylinder/']]]
 ].map(([id,title,grade,subject,description,art,type,links])=>({id,title,grade,subject,description,art,type,links}));
