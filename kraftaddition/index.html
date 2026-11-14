@@ -181,11 +181,10 @@ function paint() {
   const answer=Array.from(handles.children).find(node=>node.dataset.key==='answer');
   if(!drag && handles.lastElementChild!==answer) handles.append(answer);
   const n=distance(guess,origin)/scale;
-  const angle=normalize(Math.round(Math.atan2(origin[1]-guess[1],guess[0]-origin[0])*180/Math.PI));
   const [left,top,w]=bounds;
-  const useLeft=guess[0]>left+w-110;
-  const label=newtons.format(n)+' N'+(n>=.5?' · '+angle+'°':'');
-  element(group,'text',{x:guess[0]+(useLeft?-12:12),y:guess[1]+(guess[1]<top+34?24:-12),fill:color.answer,class:'tip-value','text-anchor':useLeft?'end':'start'},label);
+  const useLeft=guess[0]>left+w-105;
+  const label=newtons.format(n)+' N';
+  element(group,'text',{x:guess[0]+(useLeft?-32:32),y:guess[1]+(guess[1]<top+42?36:-28),fill:color.answer,class:'tip-value','text-anchor':useLeft?'end':'start'},label);
   answer.setAttribute('aria-label','Spitze des Antwortpfeils: '+label+'. Mit den Pfeiltasten verschieben.');
 }
 function resetDrawing() {
