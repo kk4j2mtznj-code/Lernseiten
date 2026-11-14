@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#161514">
+<title>Personen beschreiben · Deutsch 7</title>
+<link rel="stylesheet" href="style.css">
+<script src="pdf-lib.min.js" defer></script>
+<script src="app.js" defer></script>
+</head>
+<body>
+<header><div class="bar"><a href="../#inhalte">← Lernseiten</a><span>Deutsch · Klasse 7</span></div></header>
+<main>
+<h1>Personen beschreiben</h1>
+<section aria-labelledby="person-title">
+<h2 id="person-title">Wähle eine Person</h2>
+<div class="people" role="group" aria-labelledby="person-title">
+<button type="button" data-person="0" aria-pressed="true"><img src="bilder/person-1.webp" alt=""><span>Person 1</span></button>
+<button type="button" data-person="1" aria-pressed="false"><img src="bilder/person-2.webp" alt=""><span>Person 2</span></button>
+<button type="button" data-person="2" aria-pressed="false"><img src="bilder/person-3.webp" alt=""><span>Person 3 · Comic</span></button>
+</div>
+</section>
+<section aria-labelledby="level-title">
+<h2 id="level-title">Wähle dein Niveau</h2>
+<div class="levels" role="group" aria-labelledby="level-title">
+<button type="button" data-level="1" aria-pressed="true"><b aria-hidden="true">★☆☆</b><span>Schritt für Schritt</span></button>
+<button type="button" data-level="2" aria-pressed="false"><b aria-hidden="true">★★☆</b><span>Mit Checkliste</span></button>
+<button type="button" data-level="3" aria-pressed="false"><b aria-hidden="true">★★★</b><span>Selbstständig</span></button>
+</div>
+</section>
+<div class="workspace">
+<figure><a id="large-photo" target="_blank" rel="noopener" aria-label="Bild in einem neuen Tab vergrößern"><img id="portrait" alt=""></a><figcaption><span id="caption"></span><a id="photo-link" target="_blank" rel="noopener">Bild vergrößern ↗</a></figcaption></figure>
+<section class="editor" aria-labelledby="editor-title">
+<h2 id="editor-title">Deine Personenbeschreibung</h2>
+<div id="writing"></div>
+<div class="actions"><button type="button" class="accent" id="save">Speichern</button><span>Als PDF mit 14 pt und 1,5-fachem Zeilenabstand</span></div>
+<p id="status" aria-live="polite" hidden></p>
+</section>
+</div>
+<dialog id="pdf-dialog" aria-labelledby="pdf-title">
+<div class="pdf-heading"><h2 id="pdf-title">Deine PDF</h2><button type="button" id="close-pdf">Schließen</button></div>
+<div class="pdf-actions"><a class="accent" id="download" download>PDF herunterladen</a><a id="open-pdf" target="_blank" rel="noopener">PDF öffnen ↗</a></div>
+<iframe id="pdf-view" title="Vorschau deiner PDF"></iframe>
+</dialog>
+</main>
+</body>
+</html>
