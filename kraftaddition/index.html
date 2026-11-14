@@ -6,48 +6,52 @@
 <meta name="theme-color" content="#181818">
 <title>Kraftaddition · Zusatztraining | Physik 8</title>
 <style>
-:root{font-family:system-ui,sans-serif;color:#232321;background:#f4f1eb;--orange:#ffa653;--ink:#191919;--muted:#625d54}
-*{box-sizing:border-box}body{margin:0}a{color:inherit}header{background:var(--ink);color:#fff}header div{max-width:1140px;margin:auto;padding:1rem 1.2rem;display:flex;justify-content:space-between;gap:1rem;align-items:center}header a{color:var(--orange)}
-main{max-width:1140px;margin:auto;padding:clamp(1rem,3vw,2rem) 1.2rem 3rem}.intro{padding:.5rem 0 1.2rem}h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.03;letter-spacing:-.045em;margin:.3rem 0 .75rem}p{line-height:1.5}.intro p{margin:.25rem 0;color:var(--muted)}.levels{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.2rem}button{font:inherit;font-weight:700;border:1px solid #c9c1b4;background:#fff;border-radius:.6rem;padding:.65rem 1rem;min-height:44px;cursor:pointer;color:var(--ink)}button[aria-pressed=true],.primary{background:var(--orange);border-color:#ba6624}button:disabled{opacity:.5;cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #864300;outline-offset:3px}
-.workspace{display:grid;grid-template-columns:1.23fr 1fr;gap:1rem;align-items:start}.card{background:#fff;border:1px solid #d9d2c7;border-radius:1rem;padding:clamp(.9rem,2vw,1.45rem)}.dark{background:var(--ink);color:#fff;border-color:var(--ink)}.dark p{color:#e2dbd0;margin:.55rem 0 0}h2{font-size:1.45rem;margin:.25rem 0 .5rem;line-height:1.15}h3{margin:0}.small{font-size:.92rem;color:var(--muted)}.dark .small{color:#e2dbd0}.label{font-weight:700;color:#8b440e;margin:0 0 .45rem}.legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.86rem}.fixed{color:#d7dde4}.answer{color:var(--orange)}
-svg{display:block;width:100%;max-height:390px;margin:.55rem auto;background:#222;border-radius:.55rem}.arrow{stroke-width:3;stroke-linecap:round}.diagram-label{font:700 13px system-ui;paint-order:stroke;stroke:#222;stroke-width:4px;stroke-linejoin:round}
-#diagram{touch-action:none;user-select:none}.grid{stroke:#514e47;stroke-width:.4}.axis{stroke:#aaa092;stroke-width:.75}.handle{cursor:grab;outline:none}.handle:active{cursor:grabbing}.handle:focus-visible .visible-handle{stroke:#fff;stroke-width:2.5}.tools{display:flex;flex-wrap:wrap;gap:.4rem}.tools button{padding:.4rem .65rem;color:var(--ink)}#measurement{font-variant-numeric:tabular-nums}.construction{stroke-dasharray:5 3}.actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}details{margin-top:1rem;line-height:1.5}summary{cursor:pointer;font-weight:700}#feedback{min-height:3em;margin-bottom:0}#feedback.good{color:#22613c}#feedback.bad{color:#862b1b}[hidden]{display:none!important}.forces{line-height:1.55;margin-top:.5rem;padding-left:1.3rem}.result{white-space:pre-line}@media(max-width:750px){.workspace{grid-template-columns:1fr}}@media(prefers-reduced-motion:no-preference){button:hover:not(:disabled){filter:brightness(.94)}}
+:root{font-family:system-ui,sans-serif;color:#232321;background:#222;--orange:#ffa653}
+*{box-sizing:border-box}body{margin:0}main{display:flex;flex-direction:column;min-height:100vh;min-height:100dvh}
+.toolbar{background:#fffaf3;border-bottom:1px solid #72675b;padding:.5rem clamp(.65rem,2vw,1.25rem);z-index:1}
+.topline,.task-heading,.task-actions,.tools,.levels{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem .65rem}
+.topline{justify-content:space-between}.topline a{color:#67340c;font-size:.85rem}h1,h2,p{margin:0}h1{font-size:clamp(1rem,2.5vw,1.45rem)}
+h2{font-size:1rem}.task-heading,.task-actions{margin-top:.4rem}#progress{font-size:.8rem;color:#784314;font-weight:700}
+#prompt{font-size:.94rem;line-height:1.35;margin:.15rem 0}#forces{display:flex;flex-wrap:wrap;gap:.2rem .9rem;list-style:none;padding:0;margin:.2rem 0;font-size:.85rem;color:#51483e}
+.small,#hint{font-size:.83rem;line-height:1.35;color:#554b40}.small{margin:.25rem 0}.actions{display:flex;gap:.4rem}#feedback:not(:empty){margin-top:.3rem;font-size:.88rem}#feedback.good{color:#22613c}#feedback.bad{color:#862b1b}
+button{font:inherit;font-size:.86rem;font-weight:700;border:1px solid #c9c1b4;background:#fff;color:#222;border-radius:.45rem;padding:.35rem .6rem;min-height:36px;cursor:pointer}button[aria-pressed=true],.primary{background:var(--orange);border-color:#ba6624}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #864300;outline-offset:2px}
+summary{font-size:.86rem;font-weight:700;cursor:pointer}details[open]{flex-basis:100%}#hint{margin-top:.2rem}[hidden]{display:none!important}
+.surface{position:relative;flex:1;min-height:260px;background:#222}
+#diagram{position:absolute;inset:0;display:block;width:100%;height:100%;touch-action:none;user-select:none}
+.axis{stroke:#aaa092;stroke-width:.7}.arrow{stroke-width:3;stroke-linecap:round}.diagram-label{font:700 13px system-ui;paint-order:stroke;stroke:#222;stroke-width:4px;stroke-linejoin:round}
+.handle{cursor:grab;outline:none}.handle:active{cursor:grabbing}.handle:focus-visible .visible-handle{stroke:#fff;stroke-width:2.5}.construction{stroke-dasharray:5 3}
+.tip-value{font:700 13px system-ui;paint-order:stroke;stroke:#222;stroke-width:5px;stroke-linejoin:round;pointer-events:none}
+@media(pointer:coarse){button{min-height:44px}}
 </style>
 </head>
 <body>
-<header><div><strong>Lernseiten · Physik 8</strong><a href="../">Zur Übersicht</a></div></header>
 <main>
-<section class="intro"><h1>Kräfte addieren</h1><p>Zusatztraining für alle, die mit dem Arbeitsblatt fertig sind.</p></section>
-<nav class="levels" aria-label="Übungen auswählen">
+<div class="toolbar">
+<div class="topline"><h1>Kraftaddition · Zusatztraining</h1><nav class="levels" aria-label="Übungen auswählen">
 <button data-level="0" aria-pressed="true" aria-label="Ein Stern, Kräfte auf einer Linie">★☆☆</button>
 <button data-level="1" aria-pressed="false" aria-label="Zwei Sterne, Kräfte im Winkel">★★☆</button>
 <button data-level="2" aria-pressed="false" aria-label="Drei Sterne, fehlende Kraft bestimmen">★★★</button>
 <button data-level="3" aria-pressed="false">Exit-Ticket</button>
-</nav>
-<div class="workspace">
-<section class="card dark" aria-labelledby="diagram-title">
-<h2 id="diagram-title">Kraftdiagramm</h2>
-<div class="legend"><span class="fixed">— Vorgegebene Kräfte</span><span class="answer">— Dein Kraftpfeil</span></div>
+</nav><a href="../">Zur Übersicht</a></div>
+<div class="task-heading"><h2 id="task-title"></h2><p id="progress"></p></div>
+<p id="prompt"></p><ul id="forces"></ul>
+<p class="small" id="drawing-guide">Ziehe die orange Pfeilspitze. Raster: fein 2,5 N · kräftig 10 N. 0° zeigt nach rechts, 90° nach oben.</p>
+<div class="task-actions">
+<div id="drawing-tools" class="tools"><span class="small">Hilfspfeile am gelben Anfang ziehen:</span><div class="tools" id="copy-buttons"></div></div>
+<div class="actions"><button class="primary" id="check">Prüfen</button><button id="next" hidden>Weiter</button></div>
+<details id="help"><summary>Tipp anzeigen</summary><p id="hint"></p></details>
+</div>
+<p id="feedback" role="status" aria-live="polite"></p>
+</div>
+<section class="surface" aria-label="Kraftdiagramm">
 <svg id="diagram" viewBox="0 0 440 310" role="group" aria-label="Koordinatensystem mit gemeinsamem Angriffspunkt">
-<defs><marker id="fixedTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#d7dde4"/></marker><marker id="answerTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#ffa653"/></marker><marker id="helperTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#f4d47f"/></marker></defs>
+<defs><marker id="fixedTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#d7dde4"/></marker><marker id="answerTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#ffa653"/></marker><marker id="helperTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#f4d47f"/></marker><pattern id="minorGrid" patternUnits="userSpaceOnUse" x="220" y="155" width="3.375" height="3.375"><path d="M0 3.375V0H3.375" fill="none" stroke="#494640" stroke-width=".36"/></pattern>
+<pattern id="majorGrid" patternUnits="userSpaceOnUse" x="220" y="155" width="13.5" height="13.5"><path d="M0 13.5V0H13.5" fill="none" stroke="#686258" stroke-width=".65"/></pattern></defs>
+<rect id="minor-fill" fill="url(#minorGrid)"/><rect id="major-fill" fill="url(#majorGrid)"/>
 <g id="grid"></g><g id="vectors"></g><g id="handles"></g>
 </svg>
-<p class="small">0° zeigt nach rechts, 90° nach oben. Die Winkel steigen gegen den Uhrzeigersinn. Ein Rasterabstand entspricht 10 N.</p>
-<div id="drawing-tools">
-<p class="small">Ziehe den orangefarbenen Griff an der Pfeilspitze. Mit Hilfspfeilen kannst du Kräfte parallel verschieben und aneinanderlegen. Ziehe dafür am gelben Griff am Pfeilanfang.</p>
-<div class="tools" id="copy-buttons"></div>
-</div>
 </section>
-<section class="card" aria-labelledby="task-title">
-<p class="label" id="progress"></p><h2 id="task-title"></h2><p id="prompt"></p><ul class="forces" id="forces"></ul>
-<div id="controls">
-<p id="measurement" class="small"></p>
-</div>
-<details id="help"><summary>Tipp anzeigen</summary><p id="hint"></p></details>
-<div class="actions"><button class="primary" id="check">Prüfen</button><button id="next" hidden>Weiter</button></div>
-<p id="feedback" class="result" role="status" aria-live="polite"></p>
-</section>
-</div>
 </main>
 <script>
 'use strict';
@@ -93,17 +97,31 @@ function element(parent, tag, attributes, label) {
   return node;
 }
 const grid = byId('grid');
-for (let i=-10;i<=10;i++) {
-  const x=origin[0]+i*10*scale, y=origin[1]+i*10*scale;
-  element(grid,'line',{x1:x,x2:x,y1:20,y2:290,class:i?'grid':'axis'});
-  element(grid,'line',{x1:85,x2:355,y1:y,y2:y,class:i?'grid':'axis'});
-}
-for (const [x,y,s] of [[364,159,'0°'],[229,17,'90°'],[49,159,'180°'],[228,302,'270°']]) {
-  element(grid,'text',{x,y,fill:'#fff',class:'diagram-label'},s);
+let bounds = [0,0,440,310];
+function fitDiagram() {
+  const {width,height}=diagram.getBoundingClientRect();
+  if(!width||!height)return;
+  const ratio=Math.min(width/440,height/310);
+  const w=width/ratio,h=height/ratio;
+  bounds=[origin[0]-w/2,origin[1]-h/2,w,h];
+  diagram.setAttribute('viewBox',bounds.join(' '));
+  const [left,top]=bounds,right=left+w,bottom=top+h;
+  for(const id of ['minor-fill','major-fill']){
+    const fill=byId(id);
+    for(const [name,value] of Object.entries({x:left,y:top,width:w,height:h})) fill.setAttribute(name,value);
+  }
+  grid.replaceChildren();
+  element(grid,'line',{x1:left,x2:right,y1:origin[1],y2:origin[1],class:'axis'});
+  element(grid,'line',{x1:origin[0],x2:origin[0],y1:top,y2:bottom,class:'axis'});
+  for(const [x,y,label] of [[right-25,origin[1]-7,'0°'],[origin[0]+8,top+17,'90°'],[left+8,origin[1]-7,'180°'],[origin[0]+8,bottom-8,'270°']]){
+    element(grid,'text',{x,y,fill:'#eee',class:'diagram-label'},label);
+  }
 }
 let level=0, index=0, score=0, checked=false, completed=false;
 let task = tasks[0][0];
 const step = 10 * scale;
+const snapStep = step / 4;
+const newtons = new Intl.NumberFormat("de", {maximumFractionDigits:1});
 let guess = [origin[0] + step, origin[1]];
 let copies = new Map();
 let drag = null;
@@ -164,7 +182,11 @@ function paint() {
   if(!drag && handles.lastElementChild!==answer) handles.append(answer);
   const n=distance(guess,origin)/scale;
   const angle=normalize(Math.round(Math.atan2(origin[1]-guess[1],guess[0]-origin[0])*180/Math.PI));
-  byId('measurement').textContent='Dein Pfeil: '+Math.round(n)+' N'+(n>=.5?' bei '+angle+'°':'');
+  const [left,top,w]=bounds;
+  const useLeft=guess[0]>left+w-110;
+  const label=newtons.format(n)+' N'+(n>=.5?' · '+angle+'°':'');
+  element(group,'text',{x:guess[0]+(useLeft?-12:12),y:guess[1]+(guess[1]<top+34?24:-12),fill:color.answer,class:'tip-value','text-anchor':useLeft?'end':'start'},label);
+  answer.setAttribute('aria-label','Spitze des Antwortpfeils: '+label+'. Mit den Pfeiltasten verschieben.');
 }
 function resetDrawing() {
   guess=[origin[0]+step,origin[1]];
@@ -186,14 +208,22 @@ function resetDrawing() {
   }));
 }
 function place(key,point,snap) {
-  const [x,y]=point;
-  point=[Math.max(22,Math.min(418,x)),Math.max(20,Math.min(290,y))];
+  const [left,top,w,h]=bounds;
+  const margins=18;
+  const min=[left+margins,top+margins], max=[left+w-margins,top+h-margins];
+  point=point.map((v,i)=>Math.max(min[i],Math.min(max[i],v)));
   if(snap){
     const anchors=[origin];
     if(key!=='answer') anchors.push(...vectorLayout().map(({end})=>end));
     for(const [i,start] of copies) if(String(i)!==key) anchors.push(endpoint(start,task.vectors[i]));
     const closest=anchors.reduce((a,b)=>distance(point,b)<distance(point,a)?b:a);
-    if(distance(point,closest)<8) point=[...closest];
+    if(distance(point,closest)<snapStep && closest.every((v,i)=>v>=min[i]&&v<=max[i])) point=[...closest];
+    else point=point.map((v,i)=>{
+      const first=Math.ceil((min[i]-origin[i])/snapStep);
+      const last=Math.floor((max[i]-origin[i])/snapStep);
+      const index=Math.max(first,Math.min(last,Math.round((v-origin[i])/snapStep)));
+      return origin[i]+index*snapStep;
+    });
   }
   if(key==='answer')guess=point;
   else copies.set(Number(key),point);
@@ -225,13 +255,13 @@ diagram.addEventListener('keydown',event=>{
   const direction=directions[event.key];
   if(checked||key===undefined||!direction)return;
   event.preventDefault();
-  const [x,y]=positionOf(key), increment=event.shiftKey?step:scale;
+  const [x,y]=positionOf(key), increment=event.shiftKey?step:snapStep;
   place(key,[x+direction[0]*increment,y+direction[1]*increment],false);
 });
 function loadTask() {
   task=tasks[level][index];
   checked=completed=false;
-  byId('controls').hidden=false;
+  byId('drawing-guide').hidden=false;
   byId('check').hidden=false;
   byId('next').hidden=true;
   byId('help').open=false;
@@ -246,7 +276,7 @@ function loadTask() {
     return li;
   }));
   resetDrawing();
-  feedback.className='result';
+  feedback.className='';
   feedback.textContent=level===3?'Anonyme Selbstkontrolle. Dein Ergebnis erscheint am Ende.':'';
   paint();
 }
@@ -267,7 +297,7 @@ byId('check').addEventListener('click',()=>{
   if(checked)return;
   const {correct,magnitudeOK,angleOK,expected,direction}=validate();
   if(!correct&&level!==3){
-    feedback.className='result bad';
+    feedback.className='bad';
     feedback.textContent=magnitudeOK?'Der Betrag passt. Prüfe die Richtung.':angleOK?'Die Richtung passt. Prüfe den Betrag.':'Prüfe Betrag und Richtung noch einmal.';
     return;
   }
@@ -275,7 +305,7 @@ byId('check').addEventListener('click',()=>{
   if(correct)score++;
   byId('drawing-tools').hidden=true;
   paint();
-  feedback.className=level===3?'result':'result good';
+  feedback.className=level===3?'':'good';
   const roundedAngle=normalize(Math.round(direction));
   feedback.textContent=level===3?'Antwort übernommen.':expected<.001?'Richtig. Die Kräfte gleichen sich aus.':'Richtig. Der Pfeil entspricht ungefähr '+Math.round(expected)+' N bei '+roundedAngle+'°.';
   byId('check').hidden=true;
@@ -290,7 +320,7 @@ byId('next').addEventListener('click',()=>{
   byId('task-title').textContent=level===3?'Dein Exit-Ticket':'Übung abgeschlossen';
   byId('prompt').textContent=score+' von '+tasks[level].length+' Aufgaben richtig.';
   byId('forces').replaceChildren();
-  byId('controls').hidden=byId('help').hidden=true;
+  byId('drawing-guide').hidden=byId('help').hidden=true;
   feedback.textContent='';
   byId('next').textContent='Neu starten';
   completed=true;
@@ -307,7 +337,9 @@ for(const button of document.querySelectorAll('[data-level]')){
     restart();
   });
 }
+fitDiagram();
 loadTask();
+new ResizeObserver(()=>{fitDiagram();paint();}).observe(diagram);
 </script>
 </body>
 </html>
