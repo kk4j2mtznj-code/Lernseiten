@@ -10,8 +10,8 @@
 *{box-sizing:border-box}body{margin:0}a{color:inherit}header{background:var(--ink);color:#fff}header div{max-width:1140px;margin:auto;padding:1rem 1.2rem;display:flex;justify-content:space-between;gap:1rem;align-items:center}header a{color:var(--orange)}
 main{max-width:1140px;margin:auto;padding:clamp(1rem,3vw,2rem) 1.2rem 3rem}.intro{padding:.5rem 0 1.2rem}h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.03;letter-spacing:-.045em;margin:.3rem 0 .75rem}p{line-height:1.5}.intro p{margin:.25rem 0;color:var(--muted)}.levels{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.2rem}button{font:inherit;font-weight:700;border:1px solid #c9c1b4;background:#fff;border-radius:.6rem;padding:.65rem 1rem;min-height:44px;cursor:pointer;color:var(--ink)}button[aria-pressed=true],.primary{background:var(--orange);border-color:#ba6624}button:disabled{opacity:.5;cursor:default}button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #864300;outline-offset:3px}
 .workspace{display:grid;grid-template-columns:1.23fr 1fr;gap:1rem;align-items:start}.card{background:#fff;border:1px solid #d9d2c7;border-radius:1rem;padding:clamp(.9rem,2vw,1.45rem)}.dark{background:var(--ink);color:#fff;border-color:var(--ink)}.dark p{color:#e2dbd0;margin:.55rem 0 0}h2{font-size:1.45rem;margin:.25rem 0 .5rem;line-height:1.15}h3{margin:0}.small{font-size:.92rem;color:var(--muted)}.dark .small{color:#e2dbd0}.label{font-weight:700;color:#8b440e;margin:0 0 .45rem}.legend{display:flex;gap:1rem;flex-wrap:wrap;font-size:.86rem}.fixed{color:#d7dde4}.answer{color:var(--orange)}
-svg{display:block;width:100%;max-height:390px;margin:.55rem auto;background:#222;border-radius:.55rem}.grid{stroke:#42413e;stroke-width:1}.axis{stroke:#cac1b3;stroke-width:1.2}.arrow{stroke-width:3;stroke-linecap:round}.diagram-label{font:700 13px system-ui;paint-order:stroke;stroke:#222;stroke-width:4px;stroke-linejoin:round}
-label.range{display:flex;justify-content:space-between;gap:1rem;font-weight:700;margin-top:1rem}input[type=range]{width:100%;min-height:36px;accent-color:#b45a15;margin:0}.actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}details{margin-top:1rem;line-height:1.5}summary{cursor:pointer;font-weight:700}#feedback{min-height:3em;margin-bottom:0}#feedback.good{color:#22613c}#feedback.bad{color:#862b1b}[hidden]{display:none!important}.forces{line-height:1.55;margin-top:.5rem;padding-left:1.3rem}.result{white-space:pre-line}@media(max-width:750px){.workspace{grid-template-columns:1fr}}@media(prefers-reduced-motion:no-preference){button:hover:not(:disabled){filter:brightness(.94)}}
+svg{display:block;width:100%;max-height:390px;margin:.55rem auto;background:#222;border-radius:.55rem}.arrow{stroke-width:3;stroke-linecap:round}.diagram-label{font:700 13px system-ui;paint-order:stroke;stroke:#222;stroke-width:4px;stroke-linejoin:round}
+#diagram{touch-action:none;user-select:none}.grid{stroke:#514e47;stroke-width:.4}.axis{stroke:#aaa092;stroke-width:.75}.handle{cursor:grab;outline:none}.handle:active{cursor:grabbing}.handle:focus-visible .visible-handle{stroke:#fff;stroke-width:2.5}.tools{display:flex;flex-wrap:wrap;gap:.4rem}.tools button{padding:.4rem .65rem;color:var(--ink)}#measurement{font-variant-numeric:tabular-nums}.construction{stroke-dasharray:5 3}.actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}details{margin-top:1rem;line-height:1.5}summary{cursor:pointer;font-weight:700}#feedback{min-height:3em;margin-bottom:0}#feedback.good{color:#22613c}#feedback.bad{color:#862b1b}[hidden]{display:none!important}.forces{line-height:1.55;margin-top:.5rem;padding-left:1.3rem}.result{white-space:pre-line}@media(max-width:750px){.workspace{grid-template-columns:1fr}}@media(prefers-reduced-motion:no-preference){button:hover:not(:disabled){filter:brightness(.94)}}
 </style>
 </head>
 <body>
@@ -28,17 +28,20 @@ label.range{display:flex;justify-content:space-between;gap:1rem;font-weight:700;
 <section class="card dark" aria-labelledby="diagram-title">
 <h2 id="diagram-title">Kraftdiagramm</h2>
 <div class="legend"><span class="fixed">— Vorgegebene Kräfte</span><span class="answer">— Dein Kraftpfeil</span></div>
-<svg id="diagram" viewBox="0 0 440 310" role="img" aria-label="Koordinatensystem mit gemeinsamem Angriffspunkt">
-<defs><marker id="fixedTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#d7dde4"/></marker><marker id="answerTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#ffa653"/></marker></defs>
-<g id="grid"></g><g id="vectors"></g>
+<svg id="diagram" viewBox="0 0 440 310" role="group" aria-label="Koordinatensystem mit gemeinsamem Angriffspunkt">
+<defs><marker id="fixedTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#d7dde4"/></marker><marker id="answerTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#ffa653"/></marker><marker id="helperTip" viewBox="0 0 9 9" refX="8" refY="4.5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L9 4.5 0 9Z" fill="#f4d47f"/></marker></defs>
+<g id="grid"></g><g id="vectors"></g><g id="handles"></g>
 </svg>
 <p class="small">0° zeigt nach rechts, 90° nach oben. Die Winkel steigen gegen den Uhrzeigersinn. Ein Rasterabstand entspricht 10 N.</p>
+<div id="drawing-tools">
+<p class="small">Ziehe den orangefarbenen Griff an der Pfeilspitze. Mit Hilfspfeilen kannst du Kräfte parallel verschieben und aneinanderlegen. Ziehe dafür am gelben Griff am Pfeilanfang.</p>
+<div class="tools" id="copy-buttons"></div>
+</div>
 </section>
 <section class="card" aria-labelledby="task-title">
 <p class="label" id="progress"></p><h2 id="task-title"></h2><p id="prompt"></p><ul class="forces" id="forces"></ul>
 <div id="controls">
-<label class="range" for="amount">Betrag <output id="amount-value" for="amount"></output></label><input id="amount" type="range" min="0" max="100" value="25" step="1">
-<label class="range" for="angle">Richtung <output id="angle-value" for="angle"></output></label><input id="angle" type="range" min="0" max="359" value="0" step="1">
+<p id="measurement" class="small"></p>
 </div>
 <details id="help"><summary>Tipp anzeigen</summary><p id="hint"></p></details>
 <div class="actions"><button class="primary" id="check">Prüfen</button><button id="next" hidden>Weiter</button></div>
@@ -54,12 +57,12 @@ const tasks = [
   {name:'Seilwinde am Hang', prompt:'Eine Winde zieht die Last am Hang hinauf. Zwei Kräfte ziehen entlang des Hangs hinab. Stelle die Gesamtkraft ein.', vectors:[[70,30],[45,210],[25,210]], hint:'30° und 210° sind entgegengesetzte Richtungen. Bei 0 N spielt die Richtung keine Rolle.'}
  ],
  [
-  {name:'Zwei Schlepper', prompt:'Die Schlepper ziehen das Schiff unter einem Winkel von 60°. Stelle die Gesamtkraft ein.', vectors:[[40,0],[40,60]], hint:'Bei zwei gleich großen Kräften liegt die Gesamtkraft genau zwischen den Pfeilen. Ergänze auf Papier ein Kräfteparallelogramm.'},
-  {name:'Suchroboter', prompt:'Zwei gespannte Seile ziehen den Roboter in unterschiedliche Richtungen. Stelle die Gesamtkraft ein.', vectors:[[40,0],[30,90]], hint:'Ergänze ein Rechteck. Seine Diagonale ist der Pfeil der Gesamtkraft.'}
+  {name:'Zwei Schlepper', prompt:'Die Schlepper ziehen das Schiff unter einem Winkel von 60°. Stelle die Gesamtkraft ein.', vectors:[[40,0],[40,60]], hint:'Bei zwei gleich großen Kräften liegt die Gesamtkraft genau zwischen den Pfeilen. Verschiebe Kopien der Kräfte parallel an die jeweils andere Spitze, um ein Kräfteparallelogramm zu zeichnen.'},
+  {name:'Suchroboter', prompt:'Zwei gespannte Seile ziehen den Roboter in unterschiedliche Richtungen. Stelle die Gesamtkraft ein.', vectors:[[40,0],[30,90]], hint:'Lege die Hilfspfeile an die jeweils andere Pfeilspitze. Die Diagonale des Rechtecks zeigt die Gesamtkraft.'}
  ],
  [
   {name:'Boje auf Position halten', prompt:'Zwei Seile ziehen an der Boje. Stelle die dritte Kraft so ein, dass die Gesamtkraft der drei Seile 0 N beträgt.', vectors:[[30,0],[40,90]], mode:'balance', hint:'Bestimme zuerst die Gesamtkraft der beiden sichtbaren Pfeile. Die dritte Kraft muss ihr genau entgegenwirken.'},
-  {name:'Bergung eines Boots', prompt:'Ein Schlepper zieht das Boot mit F₁. Beide Schlepper zusammen sollen das Boot mit 60 N nach rechts ziehen. Stelle die fehlende Kraft F₂ ein.', vectors:[[50,53]], mode:'target', target:[60,0], hint:'Die sichtbare Kraft zieht auch nach oben. Die fehlende Kraft muss diesen Anteil nach unten ausgleichen und den Rest nach rechts ergänzen.'}
+  {name:'Bergung eines Boots', prompt:'Ein Schlepper zieht das Boot mit F₁. Beide Schlepper zusammen sollen das Boot mit 60 N nach rechts ziehen. Stelle die fehlende Kraft F₂ ein.', vectors:[[50,53]], mode:'target', target:[60,0], hint:'Verbinde die Spitze von F₁ mit der Spitze der gestrichelten Zielkraft. Übertrage die Strecke parallel an den Angriffspunkt.'}
  ],
  [
   {name:'Kräfte auf einer Linie', prompt:'Stelle die Gesamtkraft ein.', vectors:[[65,180],[25,0],[15,0]]},
@@ -68,7 +71,7 @@ const tasks = [
  ]
 ];
 const byId = id => document.getElementById(id);
-const amount = byId('amount'), angle = byId('angle'), feedback = byId('feedback');
+const feedback = byId('feedback'), diagram = byId('diagram');
 const rad = degrees => degrees * Math.PI / 180;
 const xy = ([force, direction]) => [force * Math.cos(rad(direction)), force * Math.sin(rad(direction))];
 const normalize = degrees => (degrees + 360) % 360;
@@ -87,6 +90,7 @@ function element(parent, tag, attributes, label) {
   for (const [key,value] of Object.entries(attributes)) node.setAttribute(key,value);
   if (label) node.textContent = label;
   parent.append(node);
+  return node;
 }
 const grid = byId('grid');
 for (let i=-10;i<=10;i++) {
@@ -99,26 +103,131 @@ for (const [x,y,s] of [[364,159,'0°'],[229,17,'90°'],[49,159,'180°'],[228,302
 }
 let level=0, index=0, score=0, checked=false, completed=false;
 let task = tasks[0][0];
-function paint() {
-  const guess=[Number(amount.value),Number(angle.value)];
-  byId('amount-value').textContent=guess[0]+' N';
-  byId('angle-value').textContent=guess[1]+'°';
-  amount.setAttribute('aria-valuetext',guess[0]+' Newton');
-  angle.setAttribute('aria-valuetext',guess[1]+' Grad');
-  const group=byId('vectors');
-  group.replaceChildren();
-  function draw(v,label,own=false,offset=0) {
-    const [x,y]=xy(v), endX=origin[0]+x*scale, endY=origin[1]-y*scale;
-    const color=own?'#ffa653':'#d7dde4';
-    if (v[0]) element(group,'line',{x1:origin[0],y1:origin[1],x2:endX,y2:endY,stroke:color,class:'arrow','marker-end':own?'url(#answerTip)':'url(#fixedTip)'});
-    const overlap = task.vectors.some(([n,w])=>own && w===v[1] && Math.abs(n-v[0])<12);
-    element(group,'text',{x:endX+(x<0?-7:7),y:Math.max(15,Math.min(300,endY-7+offset+(overlap?27:0))),fill:color,class:'diagram-label','text-anchor':x<0?'end':'start'},label);
-  }
-  task.vectors.map((v,i)=>({v,i})).sort((a,b)=>b.v[0]-a.v[0]).forEach(({v,i})=>draw(v,'F'+(i+1),false,i*9));
-  draw(guess,'Dein Pfeil',true);
-  element(group,'circle',{cx:origin[0],cy:origin[1],r:3,fill:'#fff'});
-  byId('diagram').setAttribute('aria-label','Kraftdiagramm. '+task.vectors.map(([n,w],i)=>'F'+(i+1)+': '+n+' Newton bei '+w+' Grad').join('. ')+'. Dein Pfeil: '+guess[0]+' Newton bei '+guess[1]+' Grad.');
+const step = 10 * scale;
+let guess = [origin[0] + step, origin[1]];
+let copies = new Map();
+let drag = null;
+
+function endpoint(start, vector) {
+  const [x,y] = xy(vector);
+  return [start[0] + x*scale, start[1] - y*scale];
 }
+function distance(a,b) {
+  return Math.hypot(a[0]-b[0],a[1]-b[1]);
+}
+function vectorLayout() {
+  return task.vectors.map((v,i) => {
+    const matching = task.vectors.map((w,j) => w[1] === v[1] ? j : -1).filter(j => j >= 0);
+    const offset = (matching.indexOf(i) - (matching.length-1)/2)*13;
+    const start = [origin[0]+Math.sin(rad(v[1]))*offset, origin[1]+Math.cos(rad(v[1]))*offset];
+    return {start,end:endpoint(start,v)};
+  });
+}
+function paint() {
+  const group = byId('vectors'), handles = byId('handles');
+  group.replaceChildren();
+  for(const handle of Array.from(handles.children)){
+    if(handle.dataset.key !== 'answer' && !copies.has(Number(handle.dataset.key))) handle.remove();
+  }
+  const color = {fixed:'#d7dde4',answer:'#ffa653',helper:'#f4d47f'};
+  function draw(start,end,style,label='',dashed=false,labelDy=-7) {
+    if(distance(start,end)>.3) element(group,'line',{x1:start[0],y1:start[1],x2:end[0],y2:end[1],stroke:color[style],class:'arrow'+(dashed?' construction':''),'marker-end':'url(#'+style+'Tip)'});
+    if(label) element(group,'text',{x:end[0]+(end[0]<start[0]?-7:7),y:end[1]+labelDy,fill:color[style],class:'diagram-label','text-anchor':end[0]<start[0]?'end':'start'},label);
+  }
+  function grip(key,position,label,stroke) {
+    let handle=Array.from(handles.children).find(node=>node.dataset.key===key);
+    if(!handle){
+      handle=element(handles,'g',{class:'handle',role:'group',tabindex:'0','aria-label':label});
+      handle.dataset.key=key;
+      element(handle,'circle',{r:19,fill:'transparent'});
+      element(handle,'circle',{r:5.5,fill:'#222',stroke,'stroke-width':2,class:'visible-handle','pointer-events':'none'});
+    }
+    handle.setAttribute('transform','translate('+position.join(' ')+')');
+    handle.setAttribute('tabindex',checked?'-1':'0');
+    handle.style.display=checked?'none':'';
+  }
+  const layout=vectorLayout();
+  layout.forEach(({start,end},i)=>{
+    if(distance(start,origin)>.3) element(group,'line',{x1:origin[0],y1:origin[1],x2:start[0],y2:start[1],stroke:'#aaa092','stroke-dasharray':'2 2'});
+    draw(start,end,'fixed','F'+(i+1));
+  });
+  if(task.target) draw(origin,endpoint(origin,task.target),'helper','Zielkraft',true,16);
+  for(const [i,start] of copies){
+    draw(start,endpoint(start,task.vectors[i]),'helper','',true);
+    grip(String(i),start,'Hilfspfeil zu F'+(i+1)+'. Mit den Pfeiltasten verschieben.',color.helper);
+  }
+  draw(origin,guess,'answer');
+  element(group,'circle',{cx:origin[0],cy:origin[1],r:2.8,fill:'#fff'});
+  grip('answer',guess,'Spitze des Antwortpfeils. Mit den Pfeiltasten verschieben.',color.answer);
+  // Keep the answer handle above the construction arrows at intersecting points.
+  const answer=Array.from(handles.children).find(node=>node.dataset.key==='answer');
+  if(!drag && handles.lastElementChild!==answer) handles.append(answer);
+  const n=distance(guess,origin)/scale;
+  const angle=normalize(Math.round(Math.atan2(origin[1]-guess[1],guess[0]-origin[0])*180/Math.PI));
+  byId('measurement').textContent='Dein Pfeil: '+Math.round(n)+' N'+(n>=.5?' bei '+angle+'°':'');
+}
+function resetDrawing() {
+  guess=[origin[0]+step,origin[1]];
+  copies.clear();
+  drag=null;
+  byId('drawing-tools').hidden=false;
+  byId('copy-buttons').replaceChildren(...task.vectors.map((v,i)=>{
+    const button=document.createElement('button');
+    button.textContent='Kopie von F'+(i+1);
+    button.setAttribute('aria-pressed','false');
+    button.addEventListener('click',()=>{
+      if(checked)return;
+      if(copies.has(i)) copies.delete(i);
+      else copies.set(i,[origin[0],origin[1]+44+i*25]);
+      button.setAttribute('aria-pressed',String(copies.has(i)));
+      paint();
+    });
+    return button;
+  }));
+}
+function place(key,point,snap) {
+  const [x,y]=point;
+  point=[Math.max(22,Math.min(418,x)),Math.max(20,Math.min(290,y))];
+  if(snap){
+    const anchors=[origin];
+    if(key!=='answer') anchors.push(...vectorLayout().map(({end})=>end));
+    for(const [i,start] of copies) if(String(i)!==key) anchors.push(endpoint(start,task.vectors[i]));
+    const closest=anchors.reduce((a,b)=>distance(point,b)<distance(point,a)?b:a);
+    if(distance(point,closest)<8) point=[...closest];
+  }
+  if(key==='answer')guess=point;
+  else copies.set(Number(key),point);
+  paint();
+}
+const positionOf=key=>key==='answer'?guess:copies.get(Number(key));
+function pointerPosition(event) {
+  return new DOMPoint(event.clientX,event.clientY).matrixTransform(diagram.getScreenCTM().inverse());
+}
+diagram.addEventListener('pointerdown',event=>{
+  const handle=event.target.closest('.handle');
+  if(checked||drag||!handle||event.button!==0)return;
+  const key=handle.dataset.key, [x,y]=positionOf(key), point=pointerPosition(event);
+  drag={id:event.pointerId,key,dx:x-point.x,dy:y-point.y};
+  diagram.setPointerCapture(event.pointerId);
+  event.preventDefault();
+});
+diagram.addEventListener('pointermove',event=>{
+  if(drag?.id!==event.pointerId)return;
+  const point=pointerPosition(event);
+  place(drag.key,[point.x+drag.dx,point.y+drag.dy],true);
+});
+for(const type of ['pointerup','pointercancel','lostpointercapture']) diagram.addEventListener(type,event=>{
+  if(drag?.id===event.pointerId)drag=null;
+});
+diagram.addEventListener('keydown',event=>{
+  const key=event.target.closest('.handle')?.dataset.key;
+  const directions={ArrowLeft:[-1,0],ArrowRight:[1,0],ArrowUp:[0,-1],ArrowDown:[0,1]};
+  const direction=directions[event.key];
+  if(checked||key===undefined||!direction)return;
+  event.preventDefault();
+  const [x,y]=positionOf(key), increment=event.shiftKey?step:scale;
+  place(key,[x+direction[0]*increment,y+direction[1]*increment],false);
+});
 function loadTask() {
   task=tasks[level][index];
   checked=completed=false;
@@ -136,9 +245,7 @@ function loadTask() {
     li.textContent='F'+(i+1)+' = '+n+' N bei '+w+'°';
     return li;
   }));
-  amount.disabled=angle.disabled=false;
-  amount.value=10;
-  angle.value=0;
+  resetDrawing();
   feedback.className='result';
   feedback.textContent=level===3?'Anonyme Selbstkontrolle. Dein Ergebnis erscheint am Ende.':'';
   paint();
@@ -147,9 +254,12 @@ function validate() {
   const [x,y]=solution(task);
   const expected=Math.hypot(x,y);
   const direction=normalize(Math.atan2(y,x)*180/Math.PI);
-  const distance=Math.abs(Number(angle.value)-direction);
-  const magnitudeOK=Math.abs(Number(amount.value)-expected) <= (expected<.001 ? .01 : level===0 ? .49 : 2);
-  const angleOK=expected<.001||Math.min(distance,360-distance)<=4;
+  const [gx,gy]=[(guess[0]-origin[0])/scale,(origin[1]-guess[1])/scale];
+  const n=Math.hypot(gx,gy);
+  const actualAngle=normalize(Math.atan2(gy,gx)*180/Math.PI);
+  const separation=Math.abs(actualAngle-direction);
+  const magnitudeOK=Math.abs(n-expected)<=3;
+  const angleOK=expected<.001||(n>0&&Math.min(separation,360-separation)<=6);
   const correct=magnitudeOK&&angleOK;
   return {correct,magnitudeOK,angleOK,expected,direction};
 }
@@ -163,7 +273,8 @@ byId('check').addEventListener('click',()=>{
   }
   checked=true;
   if(correct)score++;
-  amount.disabled=angle.disabled=true;
+  byId('drawing-tools').hidden=true;
+  paint();
   feedback.className=level===3?'result':'result good';
   const roundedAngle=normalize(Math.round(direction));
   feedback.textContent=level===3?'Antwort übernommen.':expected<.001?'Richtig. Die Kräfte gleichen sich aus.':'Richtig. Der Pfeil entspricht ungefähr '+Math.round(expected)+' N bei '+roundedAngle+'°.';
@@ -173,8 +284,8 @@ byId('check').addEventListener('click',()=>{
   byId('next').focus();
 });
 byId('next').addEventListener('click',()=>{
-  if(completed){restart();amount.focus();return;}
-  if(index+1<tasks[level].length){index++;loadTask();amount.focus();return;}
+  if(completed){restart();byId('handles').querySelector('[data-key=answer]').focus();return;}
+  if(index+1<tasks[level].length){index++;loadTask();byId('handles').querySelector('[data-key=answer]').focus();return;}
   byId('progress').textContent='Abgeschlossen';
   byId('task-title').textContent=level===3?'Dein Exit-Ticket':'Übung abgeschlossen';
   byId('prompt').textContent=score+' von '+tasks[level].length+' Aufgaben richtig.';
@@ -196,7 +307,6 @@ for(const button of document.querySelectorAll('[data-level]')){
     restart();
   });
 }
-for (const input of [amount,angle]) input.addEventListener('input',paint);
 loadTask();
 </script>
 </body>
