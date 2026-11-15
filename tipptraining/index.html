@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#151412">
+<meta name="description" content="Tipptraining für die Hardware-Tastatur am iPad. Fingerübungen, kurze Sätze und Abschreibtexte auf drei Niveaus.">
+<title>Tipptraining · Deutsch 7</title>
+<style>
+:root{color-scheme:dark;--bg:#151412;--panel:#201e1b;--line:#403831;--muted:#c1b7ac;--text:#fff7ed;--accent:#ffab60;--good:#a5e4b4;--bad:#ff9b91;font-family:"Instrument Sans",system-ui,sans-serif}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text)} [hidden]{display:none!important}
+a{color:var(--accent);text-underline-offset:4px} button,select{font:inherit} button{cursor:pointer;color:inherit;touch-action:manipulation}
+button:focus-visible,a:focus-visible,select:focus-visible,#typing:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+header{border-bottom:1px solid var(--line)} .bar,main{width:min(100% - 36px,960px);margin:auto} .bar{min-height:60px;display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.9rem} .bar a{text-decoration:none;font-weight:700}
+.bar span,.muted{color:var(--muted)} main{padding:32px 0 48px}
+h1,h2,p{margin:0} h1{font-size:clamp(2.5rem,7vw,4.35rem);letter-spacing:-.055em;line-height:1.02}
+h2{font-size:clamp(1.45rem,4vw,2.05rem);letter-spacing:-.025em} .intro{margin:12px 0 25px;color:var(--muted);line-height:1.55}
+.levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:20px}
+.level,.action,.lesson,.text-button{border:1px solid var(--line);border-radius:10px;background:var(--panel);min-height:44px}
+.level{text-align:left;padding:11px 14px;display:grid;gap:4px;font-weight:700}
+.level[aria-pressed=true]{border-color:var(--accent);background:#36271b} .stars{letter-spacing:.075em;color:var(--accent)}
+.list{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:10px;background:var(--panel)}
+.lesson{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;text-align:left;width:100%;padding:12px 15px;border:0;border-radius:0;background:transparent}
+.lesson+.lesson{border-top:1px solid var(--line)} .lesson:hover,.action:hover,.text-button:hover{background:#372c22}
+.lesson:focus-visible{outline-offset:-4px} .lesson small{display:block;margin-top:3px;color:var(--muted)} .launch{color:var(--accent);font-weight:700}
+.toolbar,.section-head,.controls{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.text-button,.action{padding:9px 14px;font-weight:700} .primary,.primary:hover{background:var(--accent);border-color:var(--accent);color:#211405}
+#exercise h1{font-size:clamp(1.9rem,5.6vw,3rem);margin-top:14px} #tip{margin:7px 0 15px;color:var(--muted);line-height:1.45}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:0 0 10px}
+.metric{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:9px 12px}
+.metric span{display:block;color:var(--muted);font-size:.83rem} .metric strong{display:block;margin-top:2px;font-size:clamp(1rem,3.5vw,1.35rem);font-variant-numeric:tabular-nums}
+progress{display:block;width:100%;height:8px;appearance:none;border:0;margin:0 0 12px;background:#3a3027;border-radius:8px;overflow:hidden}
+progress::-webkit-progress-bar{background:#3a3027} progress::-webkit-progress-value{background:var(--accent)} progress::-moz-progress-bar{background:var(--accent)}
+#typing{position:relative;border:1px solid var(--line);border-radius:13px;background:#1d1a17;padding:14px 17px 10px;cursor:text}
+#typing:focus{border-color:var(--accent)} #typing[data-error=true]{border-color:var(--bad)}
+#copy{font:clamp(1.25rem,3.55vw,2.02rem)/1.65 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.015em;white-space:pre-wrap;overflow-wrap:anywhere;color:#fbefe0}
+.word{display:inline-block;white-space:nowrap} .done{color:var(--good)} .active{color:#231808;background:var(--accent);border-radius:3px} .active.wrong{background:var(--bad)}
+#cue{display:block;margin-top:3px;min-height:1.6em;color:var(--accent);font-weight:650;font-size:.9rem} #typing[data-error=true] #cue{color:var(--bad)}
+.keyboard{margin-top:12px;border:1px solid var(--line);border-radius:13px;background:var(--panel);padding:9px;display:grid;gap:4px;user-select:none}
+.keys{display:flex;gap:4px} .key{flex:1;min-width:0;min-height:clamp(25px,5vw,39px);position:relative;display:flex;align-items:center;justify-content:center;border:1px solid #55483b;border-bottom-width:2px;border-radius:5px;background:#312b25;color:#f9eee3;font-size:clamp(.61rem,2vw,.93rem);font-family:ui-monospace,monospace}
+.key small{position:absolute;top:0;right:3px;color:#c4b3a3;font-size:.62em}
+.key.home{border-bottom-color:#d78b50}.key.home-mark:after{content:"";position:absolute;width:7px;height:2px;border-radius:4px;bottom:3px;background:#da965e}
+.key.target,.key.shift{background:var(--accent);border-color:var(--accent);color:#28190a;font-weight:800}.key.target small{color:inherit}
+.controls{margin-top:12px;justify-content:flex-start} #results{padding:18px;border:1px solid var(--line);border-radius:13px;background:var(--panel);margin-top:15px}
+#results .metrics{margin:14px 0} #advice{line-height:1.5;color:var(--muted)} .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+@media(max-width:490px){.bar,main{width:calc(100% - 24px)} main{padding-top:22px}.level{padding:10px 7px;font-size:.82rem}.metrics{gap:4px}.metric{padding:8px 5px}.metric span{font-size:.7rem} .keys,.keyboard{gap:2px}.keyboard{padding:5px}.key{border-radius:3px}.key small{right:1px} #typing{padding-inline:10px}.word{max-width:100%;white-space:normal}}
+</style>
+</head>
+<body>
+<header><div class="bar"><a href="../#fach=Deutsch&amp;jahrgang=7">← Lernseiten</a><span>Deutsch · Klasse 7</span></div></header>
+<main>
+<section id="choose" aria-labelledby="title">
+  <h1 id="title">Tipptraining</h1>
+  <p class="intro">Übe mit der Hardware-Tastatur am iPad. Wähle ein Niveau und starte eine Übung.</p>
+  <div class="levels" role="group" aria-label="Niveau wählen">
+    <button class="level" data-level="0" aria-pressed="true"><span class="stars" aria-hidden="true">★☆☆</span>Fingerübungen</button>
+    <button class="level" data-level="1" aria-pressed="false"><span class="stars" aria-hidden="true">★★☆</span>Kurze Sätze</button>
+    <button class="level" data-level="2" aria-pressed="false"><span class="stars" aria-hidden="true">★★★</span>Abschreibtexte</button>
+  </div>
+  <h2>Freie Übungen</h2>
+  <div class="list" id="lessons"></div>
+</section>
+<section id="exercise" aria-labelledby="heading" hidden>
+  <div class="toolbar"><button id="back" class="text-button">← Übungen</button><span id="levelLabel" class="stars"></span></div>
+  <h1 id="heading"></h1>
+  <p id="tip"></p>
+  <div id="practice">
+    <div class="metrics">
+      <div class="metric"><span>Richtig</span><strong id="correct">0</strong></div>
+      <div class="metric"><span>Fehltasten</span><strong id="errors">0</strong></div>
+      <div class="metric"><span>Fortschritt</span><strong id="count">0 / 0</strong></div>
+      <div class="metric"><span>Schreibzeit</span><strong id="time">0:00</strong></div>
+    </div>
+    <progress id="progress" value="0" max="1" aria-label="Fortschritt"></progress>
+    <div id="typing" tabindex="0" role="group" aria-label="Übungstext" aria-describedby="tip cue">
+      <div id="copy" aria-hidden="true"></div>
+      <span id="readCopy" class="sr-only"></span>
+      <span id="cue" role="status"></span>
+    </div>
+    <div id="keyboard" class="keyboard" aria-hidden="true"></div>
+    <div class="controls">
+      <button id="pause" class="action">Pause</button>
+      <button id="hideKeys" class="action" aria-controls="keyboard" aria-expanded="true">Tastenhilfe ausblenden</button>
+    </div>
+  </div>
+  <section id="results" aria-labelledby="resultTitle" hidden>
+    <h2 id="resultTitle" tabindex="-1">Deine Auswertung</h2>
+    <div class="metrics">
+      <div class="metric"><span>Genauigkeit</span><strong id="accuracy"></strong></div>
+      <div class="metric"><span>Fehltasten</span><strong id="resultErrors"></strong></div>
+      <div class="metric"><span>Zeichen pro Minute</span><strong id="speed"></strong></div>
+      <div class="metric"><span>Schreibzeit</span><strong id="resultTime"></strong></div>
+    </div>
+    <p id="advice"></p>
+    <div class="controls"><button id="again" class="action">Wiederholen</button><button id="next" class="action primary">Nächste Übung →</button></div>
+  </section>
+</section>
+</main>
+<script>
+"use strict";
+
+const lessons = [
+  [
+    ["Grundreihe", "Lege links A S D F und rechts J K L Ö auf. F und J haben eine fühlbare Markierung.", "asdf jklö fdsa ölkj fj dk sl aö jf kd ls öa asdf jklö"],
+    ["Zeigefinger", "Bewege den linken Zeigefinger zu G und den rechten zu H. Kehre danach zu F und J zurück.", "fgf jhj gh hg fghj jhgf rf vf uj mj rgf ujh fghj jhgf"],
+    ["Obere Reihe", "Gehe nach jedem Griff in die Grundstellung zurück. Tippe Leerzeichen mit einem Daumen.", "aqa sws ded frf ftf jzj juj kik lol öpö äüä qwer uiop"],
+    ["Untere Reihe", "Tippe die unteren Tasten und kehre nach jedem Griff in die Grundstellung zurück.", "aya sxs dcd fvf fbf jnj jmj yxcv nm cx ys vb mn dx kj jy"],
+    ["Umlaute und Wechsel", "Tippe ruhig und wechsle zwischen der linken und der rechten Hand.", "öäü äöü uü oö aä äa öo üu ha hä lo lö du dü asdf jklö"]
+  ],
+  [
+    ["Der orange Schal", "Achte auf große Anfangsbuchstaben und die Punkte.", "Mila trägt einen orangen Schal. Ihre Jacke ist grau. Sie hat kurze braune Haare."],
+    ["Vor der Sporthalle", "Achte auf Umlaute und den Satzschluss.", "Emil steht vor der Tür. Er trägt grüne Schuhe. Ist das seine Mütze?"],
+    ["Die Frau am Bahnhof", "Setze nach dem Komma ein Leerzeichen.", "Die Frau trägt einen pinken Mantel. Ihre Brille ist rund, ihre Tasche ist blau."],
+    ["Wasser im Alltag", "Tippe jeden Satz in deinem eigenen Tempo.", "Für eine Jeans braucht man Wasser. Baumwolle wächst auf dem Feld. Die Fabrik färbt den Stoff."],
+    ["Auf dem Schulhof", "Achte auf Großschreibung und das Ausrufezeichen.", "Auf dem Hof steht ein großes Tor. Pia läuft zum Ball. Jetzt schießt sie!"]
+  ],
+  [
+    ["Die Frau mit dem magentafarbenen Mantel", "Hier übst du Ziffern, Bindestrich, Komma und Klammern.", "Die Frau ist etwa 1,70 m groß und trägt einen magentafarbenen Mantel. Ihre schwarze Umhängetasche hat 2 silberne Schnallen. Am rechten Ohr trägt sie einen Stern-Ohrring, am linken einen kleinen Ring (beide sind silbern)."],
+    ["Eine Durchsage am Bahnhof", "Hier übst du Doppelpunkt, Anführungszeichen und Fragezeichen.", 'Um 14:25 Uhr ertönt die Durchsage: "Der Zug nach Nordhorn fährt heute von Gleis 3 ab." Tim hält inne. Hatte er auf der Anzeige eben noch Gleis 2 gelesen?'],
+    ["Virtuelles Wasser", "Hier übst du Prozentzeichen, Ziffern und Klammern.", "Pia erklärt: Eine Jeans benötigt bei der Herstellung Wasser, etwa für den Anbau der Baumwolle und das Färben. Auf dem Etikett ihrer Hose steht: 98 % Baumwolle, 2 % Elasthan (eine Kunstfaser)."],
+    ["Fundbüro", "Hier übst du Aufzählungen, Satzzeichen und Schrägstrich.", 'Fundmeldung vom 17.11.2026: Gesucht wird ein blau-grauer Rucksack. Darin liegen ein Sporthemd (Größe 152), 2 Stifte und ein Heft mit der Aufschrift "Deutsch 7b". Abgabe: Raum 12/13 im Erdgeschoss.'],
+    ["Interview auf dem Schulhof", "Hier wechselst du zwischen Anführungszeichen, Fragen und Zahlen.", 'Um 9:45 Uhr fragt Pia: "Woran erkenne ich ihn?" Tim antwortet: "Er trägt eine Jacke mit der Nummer 27, ein weißes T-Shirt und eine Mütze." Pia lacht: "Den finde ich!"']
+  ]
+];
+
+const $ = (id) => document.getElementById(id);
+const levels = document.querySelectorAll(".level");
+const stars = ["★☆☆", "★★☆", "★★★"];
+const rows = [
+  [["^","°"],["1","!"],["2",'"'],["3","§"],["4","$"],["5","%"],["6","&"],["7","/"],["8","("],["9",")"],["0","="],["ß","?"],["´","`"]],
+  [["q"],["w"],["e"],["r"],["t"],["z"],["u"],["i"],["o"],["p"],["ü"],["+","*"]],
+  [["a"],["s"],["d"],["f"],["g"],["h"],["j"],["k"],["l"],["ö"],["ä"],["#","'"]],
+  [["⇧"],["<",">"],["y"],["x"],["c"],["v"],["b"],["n"],["m"],[",",";"],[".",":"],["-","_"],["⇧"]],
+  [[" "]]
+];
+const keycaps = [];
+const characterName = (char) => char === " " ? "Leertaste" : "„" + char + "“";
+const formatTime = (ms) => {
+  const seconds = Math.floor(ms / 1000);
+  return Math.floor(seconds / 60) + ":" + String(seconds % 60).padStart(2, "0");
+};
+const normalize = (char) => /[„“”«»]/.test(char) ? '"' : char === "’" ? "'" : char;
+let level = 0;
+let exercise = 0;
+let text = "";
+let index = 0;
+let mistakes = new Map();
+let errors = 0;
+let segments = [];
+let highlighted = [];
+let runningSince = null;
+let elapsed = 0;
+let mode = "choose";
+const activeMs = () => elapsed + (runningSince === null ? 0 : performance.now() - runningSince);
+
+for (const row of rows) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "keys";
+  for (const [plain, upper] of row) {
+    const key = document.createElement("span");
+    key.className = "key";
+    key.textContent = plain === " " ? "Leertaste" : /^[a-zäöü]$/.test(plain) ? plain.toUpperCase() : plain;
+    if (upper) {
+      const variant = document.createElement("small");
+      variant.textContent = upper;
+      key.append(variant);
+    }
+    if ("asdfjklö".includes(plain)) key.classList.add("home");
+    if (plain === "f" || plain === "j") key.classList.add("home-mark");
+    if (plain === "⇧") key.style.flex = "1.45";
+    wrapper.append(key);
+    keycaps.push({key, plain, upper});
+  }
+  $("keyboard").append(wrapper);
+}
+
+function showLessons() {
+  mode = "choose";
+  runningSince = null;
+  $("exercise").hidden = true;
+  $("choose").hidden = false;
+  const list = $("lessons");
+  list.replaceChildren();
+  levels.forEach((button, i) => button.setAttribute("aria-pressed", String(i === level)));
+  lessons[level].forEach(([title, , sample], i) => {
+    const button = document.createElement("button");
+    button.className = "lesson";
+    const info = document.createElement("span");
+    const heading = document.createElement("strong");
+    const details = document.createElement("small");
+    const launch = document.createElement("span");
+    heading.textContent = title;
+    details.textContent = sample.length + " Zeichen";
+    info.append(heading, details);
+    launch.className = "launch";
+    launch.textContent = "Start →";
+    button.append(info, launch);
+    button.addEventListener("click", () => start(i));
+    list.append(button);
+  });
+}
+
+function start(number) {
+  exercise = number;
+  const [title, tip, sample] = lessons[level][exercise];
+  text = sample;
+  mode = "ready";
+  index = 0;
+  errors = 0;
+  mistakes = new Map();
+  elapsed = 0;
+  runningSince = null;
+  $("heading").textContent = title;
+  $("tip").textContent = tip;
+  $("levelLabel").textContent = stars[level];
+  $("progress").max = text.length;
+  $("pause").textContent = "Pause";
+  $("readCopy").textContent = text;
+  const fragment = document.createDocumentFragment();
+  segments = [];
+  for (const token of text.match(/\S+| /g)) {
+    const word = document.createElement("span");
+    word.className = "word";
+    for (const char of token) {
+      const span = document.createElement("span");
+      span.textContent = char;
+      segments.push(span);
+      if (char === " ") fragment.append(span);
+      else word.append(span);
+    }
+    if (token !== " ") fragment.append(word);
+  }
+  $("copy").replaceChildren(fragment);
+  $("choose").hidden = true;
+  $("exercise").hidden = false;
+  $("results").hidden = true;
+  $("practice").hidden = false;
+  paintCurrent();
+  paintMetrics();
+  $("typing").focus({preventScroll:true});
+  window.scrollTo(0, 0);
+}
+
+function paintCurrent(error = false) {
+  const char = text[index];
+  const mark = segments[index];
+  mark.classList.add("active");
+  mark.classList.toggle("wrong", error);
+  mark.textContent = char === " " ? "␣" : char;
+  $("typing").dataset.error = String(error);
+  $("cue").textContent = error ? "Versuch es noch mal: " + characterName(char) :
+    mode === "ready" ? "Beginne mit " + characterName(char) + ". Die Zeit läuft ab dem ersten Tastendruck." :
+    "Nächste Taste: " + characterName(char);
+  highlighted.forEach((key) => key.classList.remove("target", "shift"));
+  highlighted = [];
+  const cap = keycaps.find(({plain, upper}) => char === plain || char === upper || char.toLowerCase() === plain);
+  if (!cap) return;
+  cap.key.classList.add("target");
+  highlighted.push(cap.key);
+  if (char !== cap.plain) {
+    for (const {key, plain} of keycaps) {
+      if (plain !== "⇧") continue;
+      key.classList.add("shift");
+      highlighted.push(key);
+    }
+  }
+}
+
+function paintMetrics() {
+  $("correct").textContent = index;
+  $("errors").textContent = errors;
+  $("count").textContent = index + " / " + text.length;
+  $("progress").value = index;
+  $("time").textContent = formatTime(activeMs());
+}
+
+function finish() {
+  elapsed = activeMs();
+  runningSince = null;
+  mode = "done";
+  $("practice").hidden = true;
+  $("results").hidden = false;
+  const accuracy = 100 * index / (index + errors);
+  $("accuracy").textContent = accuracy.toLocaleString("de-DE", {maximumFractionDigits:1}) + " %";
+  $("resultErrors").textContent = errors;
+  $("speed").textContent = Math.round(60000 * index / Math.max(1000, elapsed)).toLocaleString("de-DE");
+  $("resultTime").textContent = formatTime(elapsed);
+  const frequent = [...mistakes].sort((a, b) => b[1] - a[1]).slice(0, 3);
+  $("advice").textContent = frequent.length
+    ? "Diese Tasten kannst du noch üben: " + frequent.map(([char, count]) => characterName(char) + " (" + count + "×)").join(", ") + "."
+    : "Fehlerfrei getippt! Behalte dein Tempo bei der nächsten Übung bei.";
+  $("next").textContent = exercise + 1 === lessons[level].length ? "Zur Übungsauswahl →" : "Nächste Übung →";
+  $("resultTitle").focus({preventScroll:true});
+}
+
+function pause() {
+  if (mode !== "ready" && mode !== "typing") return;
+  elapsed = activeMs();
+  runningSince = null;
+  mode = "paused";
+  $("pause").textContent = "Weiter tippen";
+  $("cue").textContent = "Pausiert. Tippe auf „Weiter tippen“.";
+  $("typing").dataset.error = "false";
+  paintMetrics();
+}
+
+$("typing").addEventListener("keydown", (event) => {
+  if (event.key === "Escape") {
+    event.preventDefault();
+    pause();
+    $("pause").focus();
+    return;
+  }
+  if (mode !== "ready" && mode !== "typing") {
+    if (event.key === " ") event.preventDefault();
+    return;
+  }
+  if (event.metaKey || event.ctrlKey || event.isComposing || event.key.length !== 1) return;
+  event.preventDefault();
+  if (event.repeat) return;
+  if (mode === "ready") {
+    runningSince = performance.now();
+    mode = "typing";
+  }
+  const expected = text[index];
+  if (normalize(event.key) !== expected) {
+    errors++;
+    mistakes.set(expected, (mistakes.get(expected) || 0) + 1);
+    paintCurrent(true);
+    paintMetrics();
+    return;
+  }
+  segments[index].className = "done";
+  segments[index].textContent = expected;
+  index++;
+  paintMetrics();
+  if (index === text.length) finish();
+  else paintCurrent();
+});
+
+levels.forEach((button, i) => button.addEventListener("click", () => {
+  level = i;
+  showLessons();
+}));
+$("back").addEventListener("click", () => {
+  showLessons();
+  $("lessons").children[exercise].focus();
+});
+$("again").addEventListener("click", () => start(exercise));
+$("next").addEventListener("click", () => {
+  if (exercise + 1 < lessons[level].length) start(exercise + 1);
+  else {
+    showLessons();
+    levels[level].focus();
+  }
+});
+$("pause").addEventListener("click", () => {
+  if (mode === "paused") {
+    mode = index || errors ? "typing" : "ready";
+    if (mode === "typing") runningSince = performance.now();
+    $("pause").textContent = "Pause";
+    paintCurrent();
+    $("typing").focus({preventScroll:true});
+  } else pause();
+});
+$("hideKeys").addEventListener("click", () => {
+  const keyboard = $("keyboard");
+  keyboard.hidden = !keyboard.hidden;
+  $("hideKeys").setAttribute("aria-expanded", String(!keyboard.hidden));
+  $("hideKeys").textContent = keyboard.hidden ? "Tastenhilfe einblenden" : "Tastenhilfe ausblenden";
+  $("typing").focus({preventScroll:true});
+});
+$("typing").addEventListener("click", () => $("typing").focus({preventScroll:true}));
+document.addEventListener("visibilitychange", () => { if (document.hidden) pause(); });
+setInterval(() => { if (mode === "typing") $("time").textContent = formatTime(activeMs()); }, 250);
+showLessons();
+</script>
+</body>
+</html>
