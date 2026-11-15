@@ -1,10 +1,11 @@
 const catalog=window.LEARNING_CATALOG;
-const subjects=['Mathematik','Deutsch','Physik','Fächerübergreifend'];
+const subjects=['Mathematik','Deutsch','Physik','Chemie','Fächerübergreifend'];
 const state={subject:'all',grade:'all',platform:'all',q:''};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const normalize=s=>s.toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/ß/g,'ss');
 const drawings={
+ atom:'<circle cx="80" cy="55" r="38"/><circle cx="80" cy="55" r="20"/><circle cx="80" cy="55" r="9" fill="#f5a45d"/><g fill="#d8792c"><circle cx="72" cy="18" r="5"/><circle cx="88" cy="18" r="5"/><circle cx="118" cy="55" r="5"/><circle cx="80" cy="93" r="5"/><circle cx="42" cy="55" r="5"/><circle cx="74" cy="36" r="4"/><circle cx="86" cy="36" r="4"/></g>',
  numbers:'<rect x="25" y="17" width="110" height="72" rx="9" fill="#fcfaf4"/><path d="M80 26v54M34 53h92" stroke="#bcc2b1"/><path d="M48 30v18M39 39h18M95 39h20M40 64l15 15m0-15L40 79M96 72h20"/><circle cx="106" cy="62" r="2" fill="#f58b32" stroke="none"/><circle cx="106" cy="82" r="2" fill="#f58b32" stroke="none"/>',
  fraction:'<circle cx="55" cy="54" r="33" fill="#fcfaf4"/><path d="M55 54V21a33 33 0 0 1 28.6 49.5Z" fill="#f5a45d"/><circle cx="55" cy="54" r="33"/><path d="m55 54 28.6 16.5M55 54V21m0 33L26.4 70.5"/><path d="M108 52h29M119 25v17m-6-12 6-5M114 65h16l-16 21h16"/>',
  book:'<path d="M80 31c-15-10-37-12-58-5v59c21-7 43-5 58 5 15-10 37-12 58-5V26c-21-7-43-5-58 5Z" fill="#fcfaf4"/><path d="M80 31v59M35 41c13-3 23-1 31 3m-31 12c13-3 23-1 31 3m29-15c9-5 18-6 30-3M95 59c9-5 18-6 30-3"/><path d="M110 24V7h13v15l-6-4Z" fill="#f5a45d"/>',
@@ -25,7 +26,7 @@ function writeState(){const p=new URLSearchParams();if(state.subject!=='all')p.s
 function filtered(){const words=normalize(state.q).trim().split(/\s+/).filter(Boolean);return catalog.filter(t=>(state.subject==='all'||t.subject===state.subject)&&(state.grade==='all'||String(t.grade)===state.grade)&&(state.platform==='all'||t.links.some(([name])=>name===state.platform))&&words.every(w=>normalize(`${t.title} ${t.subject} ${t.description} ${t.type} Klasse ${t.grade}`).includes(w)));}
 function render(){
  $('search').value=state.q;$('platform').value=state.platform;
- $('subjectCards').innerHTML=subjects.map((s,i)=>`<button class="subject-tile" data-subject="${s}" aria-pressed="${state.subject===s}">${art(['fraction','book','magnet','leaf'][i])}<span><strong>${s}</strong><small>${catalog.filter(t=>t.subject===s).length} ${catalog.filter(t=>t.subject===s).length===1?'Thema':'Themen'} entdecken</small></span><span class="tile-arrow" aria-hidden="true">↗</span></button>`).join('');
+ $('subjectCards').innerHTML=subjects.map((s,i)=>`<button class="subject-tile" data-subject="${s}" aria-pressed="${state.subject===s}">${art(['fraction','book','magnet','atom','leaf'][i])}<span><strong>${s}</strong><small>${catalog.filter(t=>t.subject===s).length} ${catalog.filter(t=>t.subject===s).length===1?'Thema':'Themen'} entdecken</small></span><span class="tile-arrow" aria-hidden="true">↗</span></button>`).join('');
  $('subjectNav').innerHTML=['all',...subjects].map(s=>`<button class="nav-btn" data-subject="${s}" aria-pressed="${state.subject===s}"><span>${s==='all'?'Alle Fächer':s}</span><small>${s==='all'?catalog.length:catalog.filter(t=>t.subject===s).length}</small></button>`).join('');
  $('grades').innerHTML=['all',5,6,7,8,9].map(g=>`<button class="grade" data-grade="${g}" aria-pressed="${state.grade===String(g)}">${g==='all'?'Alle Jahrgänge':'Klasse '+g}</button>`).join('');
  $('breadcrumb').innerHTML=`<a href="#" data-reset>Übersicht</a><span aria-hidden="true">/</span><span>${state.subject==='all'?'Alle Fächer':esc(state.subject)}</span>${state.grade==='all'?'':`<span aria-hidden="true">/</span><span>Klasse ${state.grade}</span>`}`;
