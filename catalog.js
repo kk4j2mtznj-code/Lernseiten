@@ -1,4 +1,5 @@
 window.LEARNING_CATALOG = [
+ ['elektronen','Elektronen & Valenzstrichformel',8,'Chemie','Elektronen auf Schalen ziehen, Außenelektronen entdecken und Schritt für Schritt die Valenzstrichformel aufbauen. Mit drei Übungsniveaus.','atom','Simulation',[['GitHub','https://kk4j2mtznj-code.github.io/Lernseiten/elektronen/']]],
  ['einmaleins','Kleines Einmaleins',5,'Mathematik','Malaufgaben wiederholen, Ergebnisse prüfen und mit einer neuen Runde weiterüben.','numbers','Basistraining',[['Sites','https://kleines-einmaleins-training.jnwbr.chatgpt.site']]],
  ['magnetismus','Magnetismus & Magnetfelder',5,'Physik','Magnete erforschen, Pole unterscheiden und Magnetfelder sichtbar machen.','magnet','Experiment',[['GitHub','https://kk4j2mtznj-code.github.io/Magnetismus-Felder/']]],
  ['kompass','Kompass & Schatzsuche',5,'Physik','Mit dem Schiff zu den Inseln navigieren. Mit Spielmodus für den Tag der offenen Tür.','compass','Lernspiel',[['GitHub','https://kk4j2mtznj-code.github.io/Magnetismus-Felder/seefahrer/']]],
