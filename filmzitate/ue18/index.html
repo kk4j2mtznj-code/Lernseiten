@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101014">
+<meta name="description" content="KLAPPE! Ü18 – Erwachsenenfilme erkennen und ihre Erscheinungsjahre auf einer Zeitleiste einordnen.">
+<title>KLAPPE! Ü18 – Filmwissen & Zeitleiste</title>
+<style>
+:root{color-scheme:dark;--bg:#101014;--paper:#1a191e;--paper2:#232127;--line:#494046;--ink:#f6f2eb;--muted:#b1a6a9;--accent:#ff9a4c;--good:#98d5a8;--bad:#fb9b9a}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;background:radial-gradient(ellipse at 80% 0,#41261b 0,transparent 40%),var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,select,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.48;cursor:not-allowed}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+a{color:var(--accent)}
+.wrap{width:min(1100px,100%);margin:auto;padding:0 22px}
+header{background:#101014df;border-bottom:1px solid #302c31}
+header .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px;min-height:73px}
+.logo{font-size:21px;letter-spacing:-.6px;font-weight:950;color:var(--ink);text-decoration:none}
+.logo b{display:inline-grid;place-items:center;width:35px;height:35px;background:var(--accent);color:#21130e;border-radius:8px;margin-right:8px}
+.mode{color:var(--accent);letter-spacing:1.8px;font-weight:850;font-size:12px}
+.page{padding:33px 0 60px}
+h1{font-size:clamp(40px,7vw,75px);letter-spacing:-.065em;line-height:1.04;margin:7px 0 16px}
+h1 em{color:var(--accent);font-style:normal}
+.eyebrow{font-size:12px;color:var(--accent);font-weight:900;letter-spacing:2.3px;text-transform:uppercase}
+.lead{color:#d2c7c6;max-width:650px;font-size:17px}
+.panel,.timeline{border:1px solid var(--line);border-radius:20px;background:linear-gradient(155deg,#211f23,#151518);padding:22px}
+.panel h2,.timeline h2{margin:0 0 13px;font-size:20px}
+.setup{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:27px}
+label{display:block;color:#e2d3cf;font-size:12px;font-weight:800;margin-bottom:7px}
+select,input{width:100%;min-height:47px;padding:10px 13px;border-radius:10px;background:#29262d;border:1px solid #62565d;color:var(--ink)}
+.names{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:13px}
+.small{color:var(--muted);font-size:12px}
+.btn{border:0;border-radius:11px;background:var(--accent);color:#1d120c;min-height:48px;padding:11px 16px;font-weight:900}
+.btn.alt{background:#332c33;color:var(--ink);border:1px solid #69535a}
+.btn.full{width:100%}
+.btn:hover:not(:disabled){filter:brightness(1.07)}
+.homeRules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:22px}
+.rule{border:1px solid #44363a;background:#1a171b;border-radius:13px;padding:15px}
+.rule b{color:var(--accent)}.rule p{margin:7px 0 0;font-size:13px;color:#bcb1b2}
+.gamehead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:5px 0 20px}
+.gamehead h1{font-size:clamp(28px,4vw,43px);margin:3px 0 6px}
+.scores{display:flex;gap:9px;overflow-x:auto;margin-bottom:18px;padding-bottom:5px}
+.score{flex:1;min-width:130px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:#1e1b20;border:1px solid #4b3d43;border-radius:11px;padding:11px 13px}
+.score.active{border-color:var(--accent);background:#38251e}
+.score .name{font-size:12px;font-weight:850}.score small{display:block;font-size:10px;color:var(--muted)}.score strong{font-size:25px;color:var(--accent)}
+.grid{display:grid;grid-template-columns:1fr .9fr;gap:17px;align-items:start}
+.card{position:relative;background:linear-gradient(135deg,#f7c48f,#e7a262 55%,#c9804e);color:#29170f;border-radius:18px;overflow:hidden}
+.holes{height:22px;border-block:5px solid #38271e;background:repeating-linear-gradient(90deg,#38271e 0 17px,transparent 17px 31px)}
+.cardContent{padding:25px 26px 31px;min-height:209px;display:flex;flex-direction:column;justify-content:space-between}
+.cardLabel{font-size:11px;font-weight:950;letter-spacing:2px;opacity:.75}
+.clue{font-size:clamp(23px,2.9vw,31px);font-weight:900;letter-spacing:-.8px;line-height:1.23;margin:19px 0}
+.cardFoot{font-size:11px;letter-spacing:2px;font-weight:900;opacity:.72}
+.timer{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0}
+.timerNumber{font-size:25px;font-weight:950;color:var(--accent);background:#2b211e;border-radius:9px;min-width:76px;padding:7px 12px;text-align:center;font-variant-numeric:tabular-nums}
+.timerNumber.out{color:var(--bad)}
+.bar{height:7px;background:#30262a;border-radius:9px;flex:1;min-width:70px;overflow:hidden}.fill{height:100%;width:100%;background:var(--accent)}
+.choiceLabel{font-size:14px;font-weight:850;margin:20px 0 9px}
+.choices{display:grid;gap:10px}
+.choice{width:100%;text-align:left;display:flex;align-items:center;gap:13px;border-radius:12px;border:1px solid #6a5359;background:#272128;color:var(--ink);padding:13px;min-height:55px;font-weight:750}
+.choice:hover:not(:disabled){border-color:var(--accent)}
+.choice.chosen{border:2px solid var(--accent);background:#473023}
+.choice .letter{flex:none;display:grid;place-items:center;background:#4c3c3d;color:var(--accent);width:28px;height:28px;border-radius:7px;font-weight:950}
+.choice.chosen .letter{background:var(--accent);color:#1d120c}
+.timeline{padding:20px}.timeline p{color:var(--muted);font-size:12px;margin:0 0 11px}
+.slot{background:#28201f;border:1px dashed #81644c;border-radius:9px;color:#f1c39e;padding:11px 8px;min-height:43px;text-align:center;width:100%;font-size:12px;font-weight:850;margin:5px 0}
+.slot.chosen{background:#4b3022;border:2px solid var(--accent);color:white}
+.movie{display:flex;gap:15px;align-items:center;border:1px solid #56474b;background:#29252a;border-radius:10px;padding:11px 13px}
+.movie b{font-size:24px;min-width:65px;color:var(--accent)}.movie span{font-size:13px;font-weight:800;overflow-wrap:anywhere}
+.movie small{display:block;font-size:10px;color:var(--muted);font-weight:500}
+.result{padding:17px;border:1px solid #805d47;border-radius:14px;margin-top:16px;background:#261f1e}
+.result h3{margin:0;font-size:22px}.good{color:var(--good)}.bad{color:var(--bad)}
+.result p{color:#d4c8c7;font-size:14px}.result strong.points{display:block;color:var(--accent);font-size:30px;margin-top:6px}
+.podium{display:grid;gap:9px;margin:25px 0}
+.podium div{display:flex;justify-content:space-between;align-items:center;border:1px solid #56454c;border-radius:12px;background:#231e23;padding:16px}
+.podium strong{font-size:24px;color:var(--accent)}
+.overlay{position:fixed;inset:0;z-index:5;display:grid;place-items:center;background:#08080df5;padding:20px}
+.agecard{max-width:480px;background:#211e23;border:1px solid #81533b;border-radius:22px;padding:28px;box-shadow:0 30px 95px #000a}
+.agecard h1{font-size:38px}.agecard p{color:#d5c8c7}
+.ageButtons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px}
+.footer{font-size:11px;color:#8f8589;text-align:center;margin:45px auto 0;max-width:950px}
+.hidden{display:none!important}
+@media(max-width:780px){.grid{grid-template-columns:1fr}.setup,.names{grid-template-columns:repeat(2,minmax(0,1fr))}.homeRules{grid-template-columns:1fr}}
+@media(max-width:460px){.wrap{padding:0 13px}.setup,.names{grid-template-columns:1fr 1fr}.panel,.timeline{padding:16px}.cardContent{padding:19px}.clue{font-size:23px}.mode{font-size:10px}.agecard{padding:19px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="overlay" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
+ <div class="agecard">
+  <div class="eyebrow">KLAPPE! · Exklusiver Spielmodus</div>
+  <h1 id="ageTitle">Nur ab <em>18 Jahren.</em></h1>
+  <p>Dieser Modus beschäftigt sich mit pornografischen Filmtiteln und deren Erscheinungsjahren. Es gibt ausschließlich nicht explizite Filmhinweise, keine Szenen, Bilder oder Videos.</p>
+  <p>Bitte bestätige, dass du mindestens 18 Jahre alt bist.</p>
+  <div class="ageButtons"><a class="btn alt" style="display:grid;place-items:center;text-decoration:none" href="../">Zurück</a><button class="btn" id="ageYes" type="button">Ich bin 18+</button></div>
+ </div>
+</div>
+<div id="app" class="hidden">
+<header><div class="wrap"><a class="logo" href="../"><b>K!</b>KLAPPE!</a><span class="mode">FILMWISSEN · Ü18</span></div></header>
+<main class="wrap page">
+<section id="home">
+ <div class="eyebrow">Erkennen. Wählen. Einordnen.</div>
+ <h1>Drei Titel.<br><em>Ein Jahr.</em></h1>
+ <p class="lead">Das Erwachsenenfilm-Quiz im Stil von Hitster: Lies einen kurzen Filmhinweis, wähle aus drei Titeln und ordne das Erscheinungsjahr in deine persönliche Film-Zeitleiste ein.</p>
+ <div class="panel">
+  <h2>Spiel einrichten</h2>
+  <div class="setup">
+   <div><label for="playerCount">Personen</label><select id="playerCount"><option value="1">1 Person</option><option value="2" selected>2 Personen</option><option value="3">3 Personen</option><option value="4">4 Personen</option><option value="5">5 Personen</option><option value="6">6 Personen</option></select></div>
+   <div><label for="roundCount">Runden pro Person</label><select id="roundCount"><option value="4">4 Runden</option><option value="6" selected>6 Runden</option><option value="8">8 Runden</option></select></div>
+   <div><label for="timeLimit">Zeitlimit</label><select id="timeLimit"><option value="0">Ohne Zeitlimit</option><option value="30">30 Sekunden</option><option value="45" selected>45 Sekunden</option><option value="60">60 Sekunden</option></select></div>
+  </div>
+  <div style="margin-top:19px"><label>Spielernamen</label><div class="names" id="nameFields"></div></div>
+  <button type="button" class="btn full" id="startBtn" style="margin-top:20px">Spiel starten</button>
+  <p class="small">51 Filmkarten · 1–6 Personen · Keine Anmeldung · Spielstand bleibt nur im Browser gespeichert.</p>
+ </div>
+ <div class="homeRules">
+  <div class="rule"><b>01 / TITEL</b><p>Ein nicht expliziter Filmhinweis und drei Filmtitel. Wähle den passenden Namen.</p></div>
+  <div class="rule"><b>02 / JAHR</b><p>Setze den Film an die richtige Stelle vor, zwischen oder nach den Karten in deiner Zeitleiste.</p></div>
+  <div class="rule"><b>03 / PUNKTE</b><p>2 Punkte für die richtige Position, 1 Punkt für den richtigen Titel vor Ablauf der Zeit.</p></div>
+ </div>
+</section>
+<section id="game" class="hidden">
+ <div class="gamehead"><div><div class="eyebrow" id="turnCaption"></div><h1 id="turnTitle"></h1><div class="small" id="progress"></div></div><button class="btn alt" type="button" id="restartBtn">Neues Spiel</button></div>
+ <div class="scores" id="scores" aria-label="Punktestand"></div>
+ <div class="grid">
+  <div>
+   <div class="card"><div class="holes"></div><div class="cardContent"><span class="cardLabel">FILMKARTE // NICHT EXPLIZITER HINWEIS</span><div class="clue" id="clue"></div><span class="cardFoot">WELCHER FILM? WELCHES JAHR?</span></div></div>
+   <div class="timer"><span class="timerNumber" id="timeValue">0:45</span><div class="bar" id="timeBar"><div class="fill" id="timeFill"></div></div><button class="btn alt" type="button" id="speakBtn">Hinweis vorlesen</button></div>
+   <div id="choicesArea"><div class="choiceLabel">Welcher Filmtitel ist richtig?</div><div class="choices" id="choices" role="group" aria-label="Filmtitel auswählen"></div></div>
+   <div class="result hidden" id="result" aria-live="polite"></div>
+  </div>
+  <aside class="timeline"><h2>Deine Film-Zeitleiste</h2><p>Wähle die Position für das Erscheinungsjahr.</p><div id="timeline"></div><button type="button" class="btn full" id="placeBtn" disabled style="margin-top:16px">Titel und Position wählen</button></aside>
+ </div>
+</section>
+<section id="finish" class="hidden">
+ <div class="eyebrow">Abspann</div><h1>Spiel <em>beendet.</em></h1><p class="lead">Eure Punkte und richtig eingeordneten Filme im Überblick.</p>
+ <div class="podium" id="podium"></div><p class="small" id="finalStats"></p>
+ <button type="button" class="btn" id="againBtn">Noch eine Partie spielen</button>
+</section>
+<footer class="footer">KLAPPE! Ü18 · Filmhistorisches Quiz ohne Bild-, Film- oder Sexszenen. Die Titel gehören den jeweiligen Rechteinhabern. Die Jahresangaben bezeichnen die ersten Veröffentlichungen; regionale Veröffentlichungen können abweichen.</footer>
+</main>
+</div>
+<script>
+"use strict";
+const RAW=[
+["Andy Warhol drehte diesen frühen Film der amerikanischen Erwachsenen-Kinoära.","Blue Movie",1969],
+["Ein früher US-Genrefilm, dessen Titel eine mythisch klingende junge Frau nennt.","Mona the Virgin Nymph",1970],
+["Der Regisseur Wakefield Poole wurde mit diesem Film bekannt.","Boys in the Sand",1971],
+["Ein Filmname aus nur einem Wort: eine klassische Bezeichnung für eine Kurtisane.","Harlot",1971],
+["Gerard Damianos Kinoklassiker mit Linda Lovelace.","Deep Throat",1972],
+["Marilyn Chambers spielt in diesem Film der Mitchell-Brüder.","Behind the Green Door",1972],
+["Der Filmtitel kombiniert Dunkelheit und nächtliche Vorstellungen.","Dark Dreams",1972],
+["Eine Stadt an der US-Westküste spielt sich laut Filmtitel selbst.","L.A. Plays Itself",1972],
+["Georgina Spelvin übernahm die Hauptrolle in Gerard Damianos bekanntem Film.","The Devil in Miss Jones",1973],
+["Im Filmtitel geht es um die Erinnerungen von Miss Aggie.","Memories Within Miss Aggie",1973],
+["Dieser Titel lässt sich mit „Die Neuankömmlinge“ übersetzen.","The New Comers",1973],
+["Der Titel verbindet Nachmittage mit dem Namen Pamela Mann.","The Private Afternoons of Pamela Mann",1974],
+["Ein besonders kurzer Filmtitel, der auch eine Punktewertung bezeichnen kann.","Score",1974],
+["Diese Science-Fiction-Parodie erinnert dem Namen nach an Flash Gordon.","Flesh Gordon",1974],
+["Ein Literaturtitel über einen unbekleideten Neuankömmling.","Naked Came the Stranger",1975],
+["Ein Filmtitel, der auf Deutsch schlicht „Das Bild“ bedeutet.","The Image",1975],
+["Das Westerngenre wird hier schon im Namen satirisch aufgegriffen.","A Dirty Western",1975],
+["Der Titel verspricht die Geschichte einer Frau namens Joanna.","The Story of Joanna",1975],
+["Ein Klassiker mit dem Titel „Empfindungen“ auf Englisch.","Sensations",1975],
+["Radley Metzgers Film greift Motive aus Pygmalion auf.","The Opening of Misty Beethoven",1976],
+["Dieser Filmtitel spielt auf Lewis Carrolls Spiegelwelt an.","Through the Looking Glass",1976],
+["Der Name klingt nach einem Transportunternehmen aus Missouri.","Kansas City Trucking Co.",1976],
+["Ein Klassiker, dessen Titel aus einem Vornamen und einem Begriff aus dem Rundfunk besteht.","Barbara Broadcast",1977],
+["Im Titel taucht die Schauspielerin Jennifer Welles namentlich auf.","Inside Jennifer Welles",1977],
+["Ein Film, der einen Vornamen mit einer Stadt in Texas kombiniert.","Debbie Does Dallas",1978],
+["Der Titel nennt eine süße Frucht als Cocktailgarnitur.","Maraschino Cherry",1978],
+["Ein Filmtitel mit besonders schönen Pfirsichen.","Pretty Peaches",1978],
+["Der Titel verspricht die andere Seite des Skiorts Aspen.","The Other Side of Aspen",1978],
+["Ein Nachtbesuch an einem nach einer griechischen Figur benannten Ort.","A Night at the Adonis",1978],
+["Ein Titel, der New York mit dem Wort „Inferno“ verbindet.","New York City Inferno",1978],
+["Der Titel stellt eine Frau mit dem Namen Lisa vor.","Her Name Was Lisa",1979],
+["Der Name klingt nach einer Metallwerkstatt in Los Angeles.","L.A. Tool & Die",1979],
+["Im Titel wird die Geschichte einer Frau namens Tiffany Lust erzählt.","The Tale of Tiffany Lust",1979],
+["Ein US-Klassiker mit Marilyn Chambers, dessen Name „unersättlich“ bedeutet.","Insatiable",1980],
+["Eine direkte Aufforderung zum Reden bildet den englischen Filmtitel.","Talk Dirty to Me",1980],
+["Dieser Titel besteht aus einem Wort für nächtliche Träume.","Nightdreams",1981],
+["Ein historisch klingender Filmtitel über römische Soldaten.","Centurians of Rome",1981],
+["Ein futuristischer Titel, der ein Café mit einem englischen Körperbegriff verbindet.","Café Flesh",1982],
+["Eine Frau mit dem Namen Wanda begegnet im Titel der Wall Street.","Wanda Whips Wall Street",1982],
+["Ein US-Film aus den frühen Achtzigern mit dem Titel „Korruption“.","Corruption",1983],
+["Der Filmtitel bezeichnet Menschen, die man aus Filmaufnahmen kennt.","Reel People",1984],
+["Dieser Filmname greift die New-Wave-Musikrichtung der Achtziger auf.","New Wave Hookers",1985],
+["Paul Thomas führte Regie bei diesem Film mit Hyapatia Lee.","The Masseuse",1990],
+["John Stagliano produzierte diesen mehrstündigen Film über eine Modewelt.","The Fashionistas",2002],
+["Joones aufwendige Erwachsenenfilm-Produktion spielt in einer Freibeuterwelt.","Pirates",2005],
+["Ein Remake eines Gerard-Damiano-Klassikers mit dem Wort „New“ im Titel.","The New Devil in Miss Jones",2005],
+["John Staglianos Fortsetzung nutzt im Titel die Begriffe „Safado“ und „Challenge“.","Fashionistas Safado – The Challenge",2006],
+["Ein Science-Fiction-Film von Eli Cross mit einem Begriff aus der Computerwelt.","Upload",2007],
+["Dieser Film aus einer John-Stagliano-Reihe trägt die deutsche Hauptstadt im Namen.","Fashionistas Safado: Berlin",2007],
+["Die Fortsetzung eines Piratenfilms trägt den Namen Stagnetti im Untertitel.","Pirates II: Stagnetti's Revenge",2008],
+["Ein Film von Brad Armstrong aus dem Jahr der zweiten Pirates-Produktion.","Fallen",2008]
+];
+const FILMS=RAW.map((r,id)=>({id,clue:r[0],title:r[1],year:r[2]}));
+const $=id=>document.getElementById(id);
+const SAVE_KEY="klappe-adult-v1";
+let S=null,clock=null,ageAllowed=false;
+function shuffle(arr){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function save(){try{if(S)localStorage.setItem(SAVE_KEY,JSON.stringify(S));else localStorage.removeItem(SAVE_KEY);}catch(e){}}
+function display(section){["home","game","finish"].forEach(id=>$(id).classList.toggle("hidden",id!==section));}
+function drawNames(){const n=+$("playerCount").value,old=[...$("nameFields").querySelectorAll("input")].map(el=>el.value);$("nameFields").innerHTML="";for(let i=0;i<n;i++){const el=document.createElement("input");el.type="text";el.maxLength=22;el.placeholder="Spieler "+(i+1);el.value=old[i]||"Spieler "+(i+1);el.setAttribute("aria-label","Name Spieler "+(i+1));$("nameFields").appendChild(el);}}
+function currentPlayer(){return S.players[S.turn%S.players.length];}
+function currentFilm(){return FILMS[S.deck[S.turn]];}
+function optionsFor(id){const others=shuffle(FILMS.filter(f=>f.id!==id)).slice(0,2).map(f=>f.id);return shuffle([id,...others]);}
+function start(){const n=+$("playerCount").value,rounds=+$("roundCount").value,seconds=+$("timeLimit").value,names=[...$("nameFields").querySelectorAll("input")].map((e,i)=>e.value.trim()||"Spieler "+(i+1));const years=shuffle([1969,1974,1979,1986,1996,2005]);const players=names.map((name,i)=>({name,score:0,titles:0,years:0,timeline:[{title:"Referenzjahr",year:years[i],anchor:true}]}));const deck=shuffle(FILMS.map(f=>f.id)).slice(0,n*rounds);S={players,rounds,seconds,turn:0,deck,phase:"play",selected:null,choice:null,options:[],remaining:seconds,expired:false,outcome:null};nextCard(true);}
+function stopClock(){if(clock!==null){clearInterval(clock);clock=null;}}
+function timeString(n){return Math.floor(n/60)+":"+String(n%60).padStart(2,"0");}
+function drawTime(){$("timeValue").textContent=S.seconds===0?"∞":timeString(S.remaining);$("timeValue").classList.toggle("out",S.expired);$("timeBar").classList.toggle("hidden",S.seconds===0);$("timeFill").style.width=(S.seconds?Math.max(0,S.remaining)/S.seconds*100:100)+"%";}
+function startClock(){stopClock();if(S.seconds===0||S.phase!=="play")return;clock=setInterval(()=>{if(S.remaining>0){S.remaining--;if(S.remaining===0){S.expired=true;stopClock();$("progress").textContent="Zeit abgelaufen: Der Titel bringt keinen Bonuspunkt mehr. Einordnen ist weiterhin möglich.";}drawTime();if(S.remaining%5===0)save();}},1000);}
+function drawScores(){const active=S.turn%S.players.length;$("scores").innerHTML=S.players.map((p,i)=>'<div class="score '+(S.phase==="play"&&i===active?"active":"")+'"><div><span class="name">'+safe(p.name)+'</span><small>'+p.timeline.length+' Karten</small></div><strong>'+p.score+'</strong></div>').join("");}
+function drawChoices(){const el=$("choices");el.innerHTML="";S.options.forEach((id,i)=>{const b=document.createElement("button");b.type="button";b.className="choice"+(S.choice===id?" chosen":"");b.disabled=S.phase!=="play";b.setAttribute("aria-pressed",S.choice===id?"true":"false");b.innerHTML='<span class="letter">'+String.fromCharCode(65+i)+'</span><span>'+safe(FILMS[id].title)+'</span>';b.onclick=()=>{S.choice=id;save();drawChoices();updatePlace();};el.appendChild(b);});}
+function drawTimeline(){const el=$("timeline");el.innerHTML="";const t=currentPlayer().timeline;for(let i=0;i<=t.length;i++){const b=document.createElement("button");b.type="button";b.className="slot"+(S.selected===i?" chosen":"");b.disabled=S.phase!=="play";b.textContent=(S.selected===i?"✓ ":"＋ ")+(i===0?"Vor "+t[0].year:i===t.length?"Nach "+t[t.length-1].year:"Zwischen "+t[i-1].year+" und "+t[i].year);b.setAttribute("aria-pressed",S.selected===i?"true":"false");b.onclick=()=>{S.selected=i;save();drawTimeline();updatePlace();};el.appendChild(b);if(i<t.length){const row=document.createElement("div");row.className="movie";row.innerHTML='<b>'+t[i].year+'</b><span>'+safe(t[i].title)+'<small>'+(t[i].anchor?"STARTKARTE":"RICHTIG EINGEORDNET")+'</small></span>';el.appendChild(row);}}}
+function updatePlace(){const okay=S.phase==="play"&&S.selected!==null&&S.choice!==null;$("placeBtn").disabled=!okay;$("placeBtn").classList.toggle("hidden",S.phase!=="play");$("placeBtn").textContent=okay?"Film hier einordnen und auflösen":"Titel und Position wählen";}
+function nextCard(fresh){if(!S)return;display("game");if(fresh){S.phase="play";S.selected=null;S.choice=null;S.remaining=S.seconds;S.expired=false;S.outcome=null;S.options=optionsFor(currentFilm().id);}const player=currentPlayer();$("turnCaption").textContent="RUNDE "+(Math.floor(S.turn/S.players.length)+1)+" VON "+S.rounds+" · KARTE "+(S.turn+1)+"/"+S.deck.length;$("turnTitle").textContent=player.name+" ist dran!";$("progress").textContent="Erst den Titel wählen, dann das Erscheinungsjahr einordnen.";$("clue").textContent=currentFilm().clue;$("choicesArea").classList.toggle("hidden",S.phase!=="play");$("result").classList.toggle("hidden",S.phase!=="result");drawScores();drawChoices();drawTimeline();updatePlace();drawTime();save();if(S.phase==="result"){showResult();stopClock();}else startClock();}
+function reveal(){if(!S||S.phase!=="play"||S.selected===null||S.choice===null)return;const c=currentFilm(),p=currentPlayer(),t=p.timeline,i=S.selected,prev=i===0?-Infinity:t[i-1].year,next=i===t.length?Infinity:t[i].year;const yearRight=c.year>=prev&&c.year<=next,titleRight=S.choice===c.id,bonus=titleRight&&!S.expired,earned=(yearRight?2:0)+(bonus?1:0);if(yearRight){p.years++;t.splice(i,0,{title:c.title,year:c.year,anchor:false});}if(bonus)p.titles++;p.score+=earned;S.outcome={yearRight,titleRight,bonus,earned,choice:S.choice};S.phase="result";stopClock();nextCard(false);}
+function showResult(){const c=currentFilm(),o=S.outcome,el=$("result");if(!o)return;const titleInfo=o.bonus?"Richtiger Titel: +1 Punkt.":o.titleRight?"Richtiger Titel, aber die Zeit war abgelaufen.":"Deine Auswahl: "+safe(FILMS[o.choice].title)+" (falsch).";el.innerHTML='<h3 class="'+(o.yearRight?"good":"bad")+'">'+(o.yearRight?"Richtig eingeordnet!":"Nicht richtig eingeordnet.")+'</h3><strong class="points">+'+o.earned+' Punkte</strong><p><b>Richtiger Film:</b> '+safe(c.title)+'</p><p><b>Erscheinungsjahr:</b> '+c.year+'</p><p>'+titleInfo+" "+(o.yearRight?"Die Filmkarte bleibt liegen.":"Die Filmkarte wird abgelegt.")+'</p><button class="btn full" id="nextBtn" type="button">'+(S.turn+1===S.deck.length?"Auswertung ansehen":"Nächster Film")+'</button>';$("nextBtn").onclick=advance;}
+function advance(){if(!S||S.phase!=="result")return;S.turn++;if(S.turn>=S.deck.length){S.phase="finish";finish();}else nextCard(true);window.scrollTo({top:0,behavior:"smooth"});}
+function finish(){if(!S)return;stopClock();display("finish");const ranks=S.players.slice().sort((a,b)=>b.score-a.score||b.years-a.years);$("podium").innerHTML=ranks.map((p,i)=>'<div><span><b>'+(i+1)+'. '+safe(p.name)+'</b> · '+p.years+' Jahre richtig</span><strong>'+p.score+' P</strong></div>').join("");$("finalStats").textContent=S.deck.length+" Filmkarten · "+S.players.reduce((a,p)=>a+p.years,0)+" richtig eingeordnet · "+S.players.reduce((a,p)=>a+p.titles,0)+" Titelpunkte";save();}
+function reset(){if(S&&!confirm("Neues Spiel starten? Der aktuelle Spielstand wird gelöscht."))return;stopClock();S=null;save();display("home");window.scrollTo({top:0,behavior:"smooth"});}
+function resume(){try{const old=JSON.parse(localStorage.getItem(SAVE_KEY)||"null");if(old&&Array.isArray(old.players)&&Array.isArray(old.deck)&&old.deck.length&&old.turn<=old.deck.length){S=old;if(S.phase==="finish"){finish();return;}if(S.phase==="play"||S.phase==="result"){nextCard(false);return;}}}catch(e){S=null;}display("home");}
+$("ageYes").onclick=()=>{ageAllowed=true;$("ageGate").classList.add("hidden");$("app").classList.remove("hidden");resume();};
+$("playerCount").onchange=drawNames;
+$("startBtn").onclick=start;
+$("placeBtn").onclick=reveal;
+$("speakBtn").onclick=()=>{if(!("speechSynthesis" in window)){alert("Vorlesen wird in diesem Browser nicht unterstützt.");return;}try{speechSynthesis.cancel();const text=new SpeechSynthesisUtterance(currentFilm().clue);text.lang="de-DE";text.rate=.88;speechSynthesis.speak(text);}catch(e){alert("Vorlesen ist nicht verfügbar.");}};
+$("restartBtn").onclick=reset;
+$("againBtn").onclick=reset;
+drawNames();
+</script>
+</body>
+</html>
