@@ -118,7 +118,7 @@ select,input{width:100%;min-height:47px;padding:10px 13px;border-radius:10px;bac
   </div>
   <div style="margin-top:19px"><label>Spielernamen</label><div class="names" id="nameFields"></div></div>
   <button type="button" class="btn full" id="startBtn" style="margin-top:20px">Spiel starten</button>
-  <p class="small">51 Filmkarten · 16 geprüfte Szenenbilder (sonst neutraler Platzhalter) · Keine Anmeldung · Spielstand bleibt nur im Browser gespeichert.</p>
+  <p class="small">51 Filmkarten · die ersten 16 Runden mit geprüften Szenenbildern (bei längeren Partien neutrale Platzhalter) · Keine Anmeldung · Spielstand bleibt nur im Browser gespeichert.</p>
  </div>
  <div class="homeRules">
   <div class="rule"><b>01 / TITEL</b><p>Ein nicht explizites Szenenbild und ein Text-Hinweis, anschließend drei Filmtitel.</p></div>
@@ -232,7 +232,7 @@ function drawNames(){const n=+$("playerCount").value,old=[...$("nameFields").que
 function currentPlayer(){return S.players[S.turn%S.players.length];}
 function currentFilm(){return FILMS[S.deck[S.turn]];}
 function optionsFor(id){const others=shuffle(FILMS.filter(f=>f.id!==id)).slice(0,2).map(f=>f.id);return shuffle([id,...others]);}
-function start(){const n=+$("playerCount").value,rounds=+$("roundCount").value,seconds=+$("timeLimit").value,names=[...$("nameFields").querySelectorAll("input")].map((e,i)=>e.value.trim()||"Spieler "+(i+1));const years=shuffle([1969,1974,1979,1986,1996,2005]);const players=names.map((name,i)=>({name,score:0,titles:0,years:0,timeline:[{title:"Referenzjahr",year:years[i],anchor:true}]}));const deck=shuffle(FILMS.map(f=>f.id)).slice(0,n*rounds);S={players,rounds,seconds,turn:0,deck,phase:"play",selected:null,choice:null,options:[],remaining:seconds,expired:false,outcome:null};nextCard(true);}
+function start(){const n=+$("playerCount").value,rounds=+$("roundCount").value,seconds=+$("timeLimit").value,names=[...$("nameFields").querySelectorAll("input")].map((e,i)=>e.value.trim()||"Spieler "+(i+1));const years=shuffle([1969,1974,1979,1986,1996,2005]);const players=names.map((name,i)=>({name,score:0,titles:0,years:0,timeline:[{title:"Referenzjahr",year:years[i],anchor:true}]}));const withImage=shuffle(FILMS.filter(f=>FILM_STILLS[f.title]).map(f=>f.id));const withoutImage=shuffle(FILMS.filter(f=>!FILM_STILLS[f.title]).map(f=>f.id));const deck=withImage.concat(withoutImage).slice(0,n*rounds);S={players,rounds,seconds,turn:0,deck,phase:"play",selected:null,choice:null,options:[],remaining:seconds,expired:false,outcome:null};nextCard(true);}
 function stopClock(){if(clock!==null){clearInterval(clock);clock=null;}}
 function timeString(n){return Math.floor(n/60)+":"+String(n%60).padStart(2,"0");}
 function drawTime(){$("timeValue").textContent=S.seconds===0?"∞":timeString(S.remaining);$("timeValue").classList.toggle("out",S.expired);$("timeBar").classList.toggle("hidden",S.seconds===0);$("timeFill").style.width=(S.seconds?Math.max(0,S.remaining)/S.seconds*100:100)+"%";}
