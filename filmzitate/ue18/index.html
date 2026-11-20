@@ -48,7 +48,15 @@ select,input{width:100%;min-height:47px;padding:10px 13px;border-radius:10px;bac
 .holes{height:22px;border-block:5px solid #38271e;background:repeating-linear-gradient(90deg,#38271e 0 17px,transparent 17px 31px)}
 .cardContent{padding:25px 26px 31px;min-height:209px;display:flex;flex-direction:column;justify-content:space-between}
 .cardLabel{font-size:11px;font-weight:950;letter-spacing:2px;opacity:.75}
-.clue{font-size:clamp(23px,2.9vw,31px);font-weight:900;letter-spacing:-.8px;line-height:1.23;margin:19px 0}
+.clue{font-size:clamp(21px,2.6vw,28px);font-weight:900;letter-spacing:-.6px;line-height:1.27;margin:15px 0}
+.filmStill{background:#59391f;border:1px solid #a36e45;border-radius:12px;overflow:hidden;margin:16px 0 4px;min-height:175px}
+.filmStill img{width:100%;height:205px;display:block;object-fit:cover;object-position:center}
+.filmStill .stillFallback{display:none;min-height:175px;align-items:center;justify-content:center;flex-direction:column;gap:5px;color:#ffe0bb;background:radial-gradient(circle at 70% 20%,#976138,#422d25 62%,#272125 100%);padding:14px;text-align:center}
+.stillFallback span{font-size:56px;line-height:1}.stillFallback small{font-size:12px;font-weight:800}
+.filmStill.missing img{display:none}.filmStill.missing .stillFallback{display:flex}
+.sourceNote{font-size:11px;font-weight:700;color:#53382b;margin-top:8px}
+.sourceNote a{color:#412315;text-decoration:underline}
+
 .cardFoot{font-size:11px;letter-spacing:2px;font-weight:900;opacity:.72}
 .timer{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0}
 .timerNumber{font-size:25px;font-weight:950;color:var(--accent);background:#2b211e;border-radius:9px;min-width:76px;padding:7px 12px;text-align:center;font-variant-numeric:tabular-nums}
@@ -89,7 +97,7 @@ select,input{width:100%;min-height:47px;padding:10px 13px;border-radius:10px;bac
  <div class="agecard">
   <div class="eyebrow">KLAPPE! · Exklusiver Spielmodus</div>
   <h1 id="ageTitle">Nur ab <em>18 Jahren.</em></h1>
-  <p>Dieser Modus beschäftigt sich mit pornografischen Filmtiteln und deren Erscheinungsjahren. Es gibt ausschließlich nicht explizite Filmhinweise, keine Szenen, Bilder oder Videos.</p>
+  <p>Dieser Modus beschäftigt sich mit pornografischen Filmtiteln und deren Erscheinungsjahren. Die Bildhinweise zeigen ausschließlich ausgewählte, nicht explizite Einzelbilder. Es gibt keine Filmclips oder expliziten Szenen.</p>
   <p>Bitte bestätige, dass du mindestens 18 Jahre alt bist.</p>
   <div class="ageButtons"><a class="btn alt" style="display:grid;place-items:center;text-decoration:none" href="../">Zurück</a><button class="btn" id="ageYes" type="button">Ich bin 18+</button></div>
  </div>
@@ -100,7 +108,7 @@ select,input{width:100%;min-height:47px;padding:10px 13px;border-radius:10px;bac
 <section id="home">
  <div class="eyebrow">Erkennen. Wählen. Einordnen.</div>
  <h1>Drei Titel.<br><em>Ein Jahr.</em></h1>
- <p class="lead">Das Erwachsenenfilm-Quiz im Stil von Hitster: Lies einen kurzen Filmhinweis, wähle aus drei Titeln und ordne das Erscheinungsjahr in deine persönliche Film-Zeitleiste ein.</p>
+ <p class="lead">Das Erwachsenenfilm-Quiz im Stil von Hitster: Betrachte ein jugendfreies Szenenbild, lies den Filmhinweis, wähle aus drei Titeln und ordne das Erscheinungsjahr in deine persönliche Film-Zeitleiste ein.</p>
  <div class="panel">
   <h2>Spiel einrichten</h2>
   <div class="setup">
@@ -110,10 +118,10 @@ select,input{width:100%;min-height:47px;padding:10px 13px;border-radius:10px;bac
   </div>
   <div style="margin-top:19px"><label>Spielernamen</label><div class="names" id="nameFields"></div></div>
   <button type="button" class="btn full" id="startBtn" style="margin-top:20px">Spiel starten</button>
-  <p class="small">51 Filmkarten · 1–6 Personen · Keine Anmeldung · Spielstand bleibt nur im Browser gespeichert.</p>
+  <p class="small">51 Filmkarten · 16 geprüfte Szenenbilder (sonst neutraler Platzhalter) · Keine Anmeldung · Spielstand bleibt nur im Browser gespeichert.</p>
  </div>
  <div class="homeRules">
-  <div class="rule"><b>01 / TITEL</b><p>Ein nicht expliziter Filmhinweis und drei Filmtitel. Wähle den passenden Namen.</p></div>
+  <div class="rule"><b>01 / TITEL</b><p>Ein nicht explizites Szenenbild und ein Text-Hinweis, anschließend drei Filmtitel.</p></div>
   <div class="rule"><b>02 / JAHR</b><p>Setze den Film an die richtige Stelle vor, zwischen oder nach den Karten in deiner Zeitleiste.</p></div>
   <div class="rule"><b>03 / PUNKTE</b><p>2 Punkte für die richtige Position, 1 Punkt für den richtigen Titel vor Ablauf der Zeit.</p></div>
  </div>
@@ -123,7 +131,7 @@ select,input{width:100%;min-height:47px;padding:10px 13px;border-radius:10px;bac
  <div class="scores" id="scores" aria-label="Punktestand"></div>
  <div class="grid">
   <div>
-   <div class="card"><div class="holes"></div><div class="cardContent"><span class="cardLabel">FILMKARTE // NICHT EXPLIZITER HINWEIS</span><div class="clue" id="clue"></div><span class="cardFoot">WELCHER FILM? WELCHES JAHR?</span></div></div>
+   <div class="card"><div class="holes"></div><div class="cardContent"><span class="cardLabel">FILMKARTE // BILD + TEXTHINWEIS</span><div class="filmStill" id="filmStill"><img id="filmStillImg" alt="Nicht expliziter Ausschnitt aus dem gesuchten Film" decoding="async" referrerpolicy="no-referrer"><div class="stillFallback" id="stillFallback"><span aria-hidden="true">▣</span><small>Kein geprüftes Szenenbild verfügbar</small></div></div><div class="clue" id="clue"></div><div id="sourceNote" class="sourceNote hidden"></div><span class="cardFoot">WELCHER FILM? WELCHES JAHR?</span></div></div>
    <div class="timer"><span class="timerNumber" id="timeValue">0:45</span><div class="bar" id="timeBar"><div class="fill" id="timeFill"></div></div><button class="btn alt" type="button" id="speakBtn">Hinweis vorlesen</button></div>
    <div id="choicesArea"><div class="choiceLabel">Welcher Filmtitel ist richtig?</div><div class="choices" id="choices" role="group" aria-label="Filmtitel auswählen"></div></div>
    <div class="result hidden" id="result" aria-live="polite"></div>
@@ -136,7 +144,7 @@ select,input{width:100%;min-height:47px;padding:10px 13px;border-radius:10px;bac
  <div class="podium" id="podium"></div><p class="small" id="finalStats"></p>
  <button type="button" class="btn" id="againBtn">Noch eine Partie spielen</button>
 </section>
-<footer class="footer">KLAPPE! Ü18 · Filmhistorisches Quiz ohne Bild-, Film- oder Sexszenen. Die Titel gehören den jeweiligen Rechteinhabern. Die Jahresangaben bezeichnen die ersten Veröffentlichungen; regionale Veröffentlichungen können abweichen.</footer>
+<footer class="footer">KLAPPE! Ü18 · Nur nicht explizite, vorab gesichtete Einzelbilder. Die Bilder werden von externen Quellen geladen und bleiben Eigentum der Rechteinhaber. Bei fehlender Bilddatei erscheint ein neutraler Platzhalter. Die Jahresangaben können regional abweichen.</footer>
 </main>
 </div>
 <script>
@@ -194,6 +202,24 @@ const RAW=[
 ["Die Fortsetzung eines Piratenfilms trägt den Namen Stagnetti im Untertitel.","Pirates II: Stagnetti's Revenge",2008],
 ["Ein Film von Brad Armstrong aus dem Jahr der zweiten Pirates-Produktion.","Fallen",2008]
 ];
+const FILM_STILLS={
+"Blue Movie":{"url":"https://m.media-amazon.com/images/M/MV5BYTNjNzZhNTItNWFkOC00ODExLTg2YjItYzM0ZGVmZGY4YTlkXkEyXkFqcGc%40._V1_.jpg","source":"IMDb","page":"https://www.imdb.com/title/tt0062745/mediaviewer/rm3802979585/"},
+"Behind the Green Door":{"url":"https://www.muscle-distribution.com/images/behind-the-green-door/still-0.jpg","source":"Muscle Distribution","page":"https://www.muscle-distribution.com/films/behind-the-green-door"},
+"The Devil in Miss Jones":{"url":"https://www.grindhousedatabase.com/images/Miss_Jones_I.jpg","source":"Grindhouse Cinema Database","page":"https://www.grindhousedatabase.com/index.php/The_Devil_in_Miss_Jones/Review"},
+"Flesh Gordon":{"url":"https://images.mubicdn.net/images/film/37397/cache-27355-1591931984/image-w1280.jpg?size=800x","source":"MUBI","page":"https://mubi.com/en/us/films/flesh-gordon"},
+"Naked Came the Stranger":{"url":"https://ilarge.lisimg.com/image/3244184/740full-naked-came-the-stranger-screenshot.jpg","source":"Listal","page":"https://www.listal.com/viewimage/3244184"},
+"The Image":{"url":"https://www.screenslate.com/sites/default/files/styles/thumbnail/public/2025-08/Image-Metzger.jpg?itok=6pnVk6Vs","source":"Screen Slate","page":"https://www.screenslate.com/articles/image"},
+"The Story of Joanna":{"url":"https://www.cinematheque.fr/media/01-films/the-story-of-joanna-_gerard-damiano-1975.jpg","source":"Cinémathèque française","page":"https://www.cinematheque.fr/film/123944.html"},
+"The Opening of Misty Beethoven":{"url":"https://www.screenslate.com/sites/default/files/styles/thumbnail/public/2025-03/Opening-of-Misty-Beethoven.jpg?itok=WRrLb6nW","source":"Screen Slate","page":"https://www.screenslate.com/articles/opening-misty-beethoven"},
+"Barbara Broadcast":{"url":"https://s1.dmcdn.net/v/SDrzy1UkUMF8mx6gh/x480","source":"Dailymotion","page":"https://www.dailymotion.com/video/x7tuet8"},
+"Debbie Does Dallas":{"url":"https://image.pmgstatic.com/cache/resized/w663/files/images/film/photos/161/935/161935056_959547.jpg","source":"FilmBooster","page":"https://www.filmbooster.com/film/109435-debbie-does-dallas/gallery/"},
+"Pretty Peaches":{"url":"https://static.wixstatic.com/media/451278_59b8cb6fbcf441fb8d10ef6f2233405a~mv2.png/v1/fill/w_853%2Ch_480%2Cal_c%2Cq_90%2Cenc_avif%2Cquality_auto/451278_59b8cb6fbcf441fb8d10ef6f2233405a~mv2.png","source":"Mondo Heather","page":"https://www.mondoheather.com/post/candide-on-speed-alex-de-renzy-s-pretty-peaches-trilogy"},
+"Insatiable":{"url":"https://i.ebayimg.com/images/g/7c4AAeSwxnRo7dq8/s-l1200.jpg","source":"Royal Books / eBay","page":"https://www.ebay.com/itm/376620898638"},
+"Nightdreams":{"url":"https://images.mubicdn.net/images/film/89226/cache-42056-1769325032/image-w1280.jpg?size=800x","source":"MUBI","page":"https://mubi.com/en/us/films/nightdreams"},
+"Café Flesh":{"url":"https://www.mondo-digital.com/cafefleshfull1.jpg","source":"Mondo Digital","page":"https://www.mondo-digital.com/cafeflesh"},
+"Pirates":{"url":"https://static.cinemagia.ro/img/db/movie/01/85/98/pirates-150983l.jpg","source":"CineMagia","page":"https://www.cinemagia.ro/filme/pirates-piratii-18598/imagini/619806/"},
+"Pirates II: Stagnetti's Revenge":{"url":"https://image.tmdb.org/t/p/original/wNeY4oky6OxOnTlEBdcQMd9MMI2.jpg","source":"TMDB","page":"https://www.themoviedb.org/movie/14312-pirates-ii-stagnetti-s-revenge/images/backdrops"}
+};
 const FILMS=RAW.map((r,id)=>({id,clue:r[0],title:r[1],year:r[2]}));
 const $=id=>document.getElementById(id);
 const SAVE_KEY="klappe-adult-v1";
@@ -215,7 +241,22 @@ function drawScores(){const active=S.turn%S.players.length;$("scores").innerHTML
 function drawChoices(){const el=$("choices");el.innerHTML="";S.options.forEach((id,i)=>{const b=document.createElement("button");b.type="button";b.className="choice"+(S.choice===id?" chosen":"");b.disabled=S.phase!=="play";b.setAttribute("aria-pressed",S.choice===id?"true":"false");b.innerHTML='<span class="letter">'+String.fromCharCode(65+i)+'</span><span>'+safe(FILMS[id].title)+'</span>';b.onclick=()=>{S.choice=id;save();drawChoices();updatePlace();};el.appendChild(b);});}
 function drawTimeline(){const el=$("timeline");el.innerHTML="";const t=currentPlayer().timeline;for(let i=0;i<=t.length;i++){const b=document.createElement("button");b.type="button";b.className="slot"+(S.selected===i?" chosen":"");b.disabled=S.phase!=="play";b.textContent=(S.selected===i?"✓ ":"＋ ")+(i===0?"Vor "+t[0].year:i===t.length?"Nach "+t[t.length-1].year:"Zwischen "+t[i-1].year+" und "+t[i].year);b.setAttribute("aria-pressed",S.selected===i?"true":"false");b.onclick=()=>{S.selected=i;save();drawTimeline();updatePlace();};el.appendChild(b);if(i<t.length){const row=document.createElement("div");row.className="movie";row.innerHTML='<b>'+t[i].year+'</b><span>'+safe(t[i].title)+'<small>'+(t[i].anchor?"STARTKARTE":"RICHTIG EINGEORDNET")+'</small></span>';el.appendChild(row);}}}
 function updatePlace(){const okay=S.phase==="play"&&S.selected!==null&&S.choice!==null;$("placeBtn").disabled=!okay;$("placeBtn").classList.toggle("hidden",S.phase!=="play");$("placeBtn").textContent=okay?"Film hier einordnen und auflösen":"Titel und Position wählen";}
-function nextCard(fresh){if(!S)return;display("game");if(fresh){S.phase="play";S.selected=null;S.choice=null;S.remaining=S.seconds;S.expired=false;S.outcome=null;S.options=optionsFor(currentFilm().id);}const player=currentPlayer();$("turnCaption").textContent="RUNDE "+(Math.floor(S.turn/S.players.length)+1)+" VON "+S.rounds+" · KARTE "+(S.turn+1)+"/"+S.deck.length;$("turnTitle").textContent=player.name+" ist dran!";$("progress").textContent="Erst den Titel wählen, dann das Erscheinungsjahr einordnen.";$("clue").textContent=currentFilm().clue;$("choicesArea").classList.toggle("hidden",S.phase!=="play");$("result").classList.toggle("hidden",S.phase!=="result");drawScores();drawChoices();drawTimeline();updatePlace();drawTime();save();if(S.phase==="result"){showResult();stopClock();}else startClock();}
+function nextCard(fresh){if(!S)return;display("game");if(fresh){S.phase="play";S.selected=null;S.choice=null;S.remaining=S.seconds;S.expired=false;S.outcome=null;S.options=optionsFor(currentFilm().id);}const player=currentPlayer();$("turnCaption").textContent="RUNDE "+(Math.floor(S.turn/S.players.length)+1)+" VON "+S.rounds+" · KARTE "+(S.turn+1)+"/"+S.deck.length;$("turnTitle").textContent=player.name+" ist dran!";$("progress").textContent="Erst den Titel wählen, dann das Erscheinungsjahr einordnen.";$("clue").textContent=currentFilm().clue;drawFilmStill();$("choicesArea").classList.toggle("hidden",S.phase!=="play");$("result").classList.toggle("hidden",S.phase!=="result");drawScores();drawChoices();drawTimeline();updatePlace();drawTime();save();if(S.phase==="result"){showResult();stopClock();}else startClock();}
+function drawFilmStill(){
+ const film=currentFilm(),photo=FILM_STILLS[film.title],frame=$("filmStill"),img=$("filmStillImg"),note=$("sourceNote");
+ img.onerror=null; img.removeAttribute("src");frame.classList.toggle("missing",!photo);
+ note.classList.add("hidden");note.replaceChildren();
+ if(photo){
+  const expected=film.id;
+  img.onerror=()=>{if(S&&currentFilm().id===expected)frame.classList.add("missing");};
+  img.src=photo.url;
+  if(S.phase==="result"){
+   note.textContent="Bildquelle: ";
+   const a=document.createElement("a");a.href=photo.page;a.target="_blank";a.rel="noopener noreferrer";a.textContent=photo.source;
+   note.appendChild(a);note.classList.remove("hidden");
+  }
+ }
+}
 function reveal(){if(!S||S.phase!=="play"||S.selected===null||S.choice===null)return;const c=currentFilm(),p=currentPlayer(),t=p.timeline,i=S.selected,prev=i===0?-Infinity:t[i-1].year,next=i===t.length?Infinity:t[i].year;const yearRight=c.year>=prev&&c.year<=next,titleRight=S.choice===c.id,bonus=titleRight&&!S.expired,earned=(yearRight?2:0)+(bonus?1:0);if(yearRight){p.years++;t.splice(i,0,{title:c.title,year:c.year,anchor:false});}if(bonus)p.titles++;p.score+=earned;S.outcome={yearRight,titleRight,bonus,earned,choice:S.choice};S.phase="result";stopClock();nextCard(false);}
 function showResult(){const c=currentFilm(),o=S.outcome,el=$("result");if(!o)return;const titleInfo=o.bonus?"Richtiger Titel: +1 Punkt.":o.titleRight?"Richtiger Titel, aber die Zeit war abgelaufen.":"Deine Auswahl: "+safe(FILMS[o.choice].title)+" (falsch).";el.innerHTML='<h3 class="'+(o.yearRight?"good":"bad")+'">'+(o.yearRight?"Richtig eingeordnet!":"Nicht richtig eingeordnet.")+'</h3><strong class="points">+'+o.earned+' Punkte</strong><p><b>Richtiger Film:</b> '+safe(c.title)+'</p><p><b>Erscheinungsjahr:</b> '+c.year+'</p><p>'+titleInfo+" "+(o.yearRight?"Die Filmkarte bleibt liegen.":"Die Filmkarte wird abgelegt.")+'</p><button class="btn full" id="nextBtn" type="button">'+(S.turn+1===S.deck.length?"Auswertung ansehen":"Nächster Film")+'</button>';$("nextBtn").onclick=advance;}
 function advance(){if(!S||S.phase!=="result")return;S.turn++;if(S.turn>=S.deck.length){S.phase="finish";finish();}else nextCard(true);window.scrollTo({top:0,behavior:"smooth"});}
